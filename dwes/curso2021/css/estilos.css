@@ -6,10 +6,14 @@ body {
 }
 
 h1 {
-	text-align:center;
+	text-align: center;
 	font-family: 'Anton';
 	text-shadow: 1px 2px #999;
 	line-height: 30px;
+}
+
+h2 {
+	text-align: center;
 }
 
 .contenedorlistas {
@@ -36,6 +40,19 @@ footer {
 	position: absolute;
 	bottom: 0;
 	margin: 0 0 1% 0;
+}
+
+.social {
+	display: inline-block;
+	height: 30px;
+	margin: 5px;
+	transition: all 0.5s;
+	width: 30px;
+  }
+
+img{
+	vertical-align: center;
+	background-color: red;
 }
 
 a:link, a:visited, a:active {
