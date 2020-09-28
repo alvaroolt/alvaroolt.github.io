@@ -1,0 +1,10 @@
+a{
+    text-decoration: none;
+}
+a:hover{
+    color: blue;
+    font-size: 18px;
+}
+th{
+    background-color: lightgray;
+}

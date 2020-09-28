@@ -1,0 +1,1 @@
+Hola {nombre}, con residencia en {direccion}.
