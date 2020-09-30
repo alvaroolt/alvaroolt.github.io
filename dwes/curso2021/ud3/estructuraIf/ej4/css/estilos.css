@@ -1,0 +1,57 @@
+#codigo{
+    display: flex;
+    justify-content: center;
+}
+
+h2{
+    text-align: center;
+}
+
+button{
+    margin: 10px auto;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.error{
+    color: red;
+}
+
+.estacion{
+    border: 1px solid black;
+    width: 90%;
+    margin: 0 auto;
+    padding: 20% 0;
+    background-size: cover;
+}
+
+.estacion h1{
+    font-size: 120px;
+    text-align: center;
+    letter-spacing: 15px;
+    margin: 0;
+}
+
+#primavera{
+    background-image: url(../pictures/primavera.jpeg);
+    font-family: 'Grandstander', cursive;
+    color: #4BEB3B;
+}
+
+#verano{
+    background-image: url(../pictures/verano.jpg);
+    font-family: 'Exo', sans-serif;
+    color: #E0EB3B;
+}
+
+#otono{
+    background-image: url(../pictures/otono.jpg);
+    font-family: 'MuseoModerno', cursive;
+    color: #6060E1;
+}
+
+#invierno{
+    background-image: url(../pictures/invierno.jpg);
+    font-family: 'Lemonada', cursive;
+    color: #F1E393;
+}
