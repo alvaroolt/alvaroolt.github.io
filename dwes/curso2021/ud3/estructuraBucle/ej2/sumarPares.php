@@ -1,5 +1,6 @@
 <?php
 $num = 2;
+$suma = 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,8 +19,11 @@ $num = 2;
         if($num % 2 == 0){
             echo "<p>" . $num . "</p>";
             $i++;
+            $suma += $num;
         }
     }
+    
+    echo "Suma: $suma";
 
     echo "<div id='codigo'><a href='../../../verCodigo.php?src=" . __FILE__ . "'><button>Ver Código</button></a></div>";
     ?>
