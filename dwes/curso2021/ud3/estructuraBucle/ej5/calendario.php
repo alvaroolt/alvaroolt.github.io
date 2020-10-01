@@ -11,6 +11,7 @@ $semana = array(1, 2, 3, 4, 5, 6, 7);
 7==domingo
 */
 $festivos = array("1-1", "6-1", "10-4", "1-5", "15-8", "12-10", "8-12", "25-12");
+$mesEmpiezaEnDomingo = false;
 ?>
 
 <!DOCTYPE html>
@@ -132,25 +133,30 @@ $festivos = array("1-1", "6-1", "10-4", "1-5", "15-8", "12-10", "8-12", "25-12")
 
             echo "</br>$mesEscogido - $anoEscogido";
 
+            if ($primerDiaSemanaMes == 0)
+                $mesEmpiezaEnDomingo = true;
+
             for ($i = 1; $i < $primerDiaSemanaMes; $i++) {
                 $calendario .= "<td></td>";
             }
-            // if ($primerDiaSemanaMes == 0)
-            //     $calendario .= "<td></td><td></td><td></td><td></td><td></td><td></td>";
             for ($j = 1; $j <= $dias; $j++) {
-                if ($x == 0) {
-                    $x += 7;
-                    $calendario .= "</tr><tr>";
-                }
-                if (date("j-n-Y") == date("$j-$mesEscogido-$anoEscogido")) {
+                if ($mesEmpiezaEnDomingo == true) { #necesito este if porque sin él, cuando el mes empezaba en domingo se bugeaba la tabla y se descuadraba
+                    $calendario .= "<td></td><td></td><td></td><td></td><td></td><td></td><td class='festivo'>$j</td></tr><tr>";
+                    $mesEmpiezaEnDomingo = false;
+                    $x--;
+                } elseif (date("j-n-Y") == date("$j-$mesEscogido-$anoEscogido")) {
                     $calendario .= "<td class='hoy'>" . $j . "</td>";
                     $x--;
-                } elseif (array_search(date("$j-$mesEscogido"), $festivos) || $x <= 2) {
+                } elseif (array_search(date("$j-$mesEscogido"), $festivos) || $x <= 1) {
                     $calendario .= "<td class='festivo'>" . $j . "</td>";
                     $x--;
                 } else {
                     $calendario .= "<td>" . $j . "</td>";
                     $x--;
+                }
+                if ($x == 0) {
+                    $x += 7;
+                    $calendario .= "</tr><tr>";
                 }
             }
             $calendario .= "</tr></table>";
