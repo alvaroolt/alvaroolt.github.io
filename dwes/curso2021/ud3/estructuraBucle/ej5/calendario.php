@@ -10,7 +10,7 @@ $semana = array(1, 2, 3, 4, 5, 6, 7);
 6==sabado
 7==domingo
 */
-$festivos = array("1-1","6-1","10-4","1-5","15-8","12-10","8-12","25-12");
+$festivos = array("1-1", "6-1", "10-4", "1-5", "15-8", "12-10", "8-12", "25-12");
 ?>
 
 <!DOCTYPE html>
@@ -130,6 +130,8 @@ $festivos = array("1-1","6-1","10-4","1-5","15-8","12-10","8-12","25-12");
             $primerDiaSemanaMes = $semana[date("w", mktime(0, 0, 0, $mesEscogido, 1, $anoEscogido))] - 1;
             $x = 8 - $primerDiaSemanaMes; # x dias hasta el comienzo de la proxima semana
 
+            echo "</br>$mesEscogido - $anoEscogido";
+
             for ($i = 1; $i < $primerDiaSemanaMes; $i++) {
                 $calendario .= "<td></td>";
             }
@@ -143,7 +145,7 @@ $festivos = array("1-1","6-1","10-4","1-5","15-8","12-10","8-12","25-12");
                 if (date("j-n-Y") == date("$j-$mesEscogido-$anoEscogido")) {
                     $calendario .= "<td class='hoy'>" . $j . "</td>";
                     $x--;
-                } elseif(array_search(date("$j-$mesEscogido"),$festivos)) {
+                } elseif (array_search(date("$j-$mesEscogido"), $festivos) || $x <= 2) {
                     $calendario .= "<td class='festivo'>" . $j . "</td>";
                     $x--;
                 } else {
