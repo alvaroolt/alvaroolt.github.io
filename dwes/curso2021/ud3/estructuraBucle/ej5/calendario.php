@@ -1,5 +1,4 @@
 <?php
-$calendario = "<table><tr><th>L</th><th>M</th><th>X</th><th>J</th><th>V</th><th>S</th><th>D</th></tr><tr>";
 $semana = array(1, 2, 3, 4, 5, 6, 7);
 /*
 1==lunes
@@ -10,7 +9,8 @@ $semana = array(1, 2, 3, 4, 5, 6, 7);
 6==sabado
 7==domingo
 */
-$festivos = array("1-1", "6-1", "10-4", "1-5", "15-8", "12-10", "8-12", "25-12");
+$mesesAno = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+$festivos = array("1-1", "6-1", "1-5", "15-8", "12-10", "8-12", "25-12");
 $mesEmpiezaEnDomingo = false;
 ?>
 
@@ -101,6 +101,36 @@ $mesEmpiezaEnDomingo = false;
             $mesEscogido = $_POST["meses"]; #recogemos el mes del usuario
             $anoEscogido = $_POST["anos"]; #recogemos el año del usuario
 
+            # Algoritmo para averiguar el día del Viernes Santo
+            # Constantes mágicas
+            $M = 24;
+            $N = 5;
+            #Cálculo de residuos
+            $a = $anoEscogido % 19;
+            $b = $anoEscogido % 4;
+            $c = $anoEscogido % 7;
+            $d = (19 * $a + $M) % 30;
+            $e = (2 * $b + 4 * $c + 6 * $d + $N) % 7;
+            # Decidir entre los 2 casos:
+            if ($d + $e < 10) {
+                $dia = $d + $e + 22;
+                $mes = 3; // marzo
+            } else {
+                $dia = $d + $e - 9;
+                $mes = 4; //abril
+            }
+            # Excepciones especiales (según artículo)
+            if ($dia == 26  && $mes == 4) { // 4 = abril
+                $dia = 19;
+            }
+            if ($dia == 25 && $mes == 4 && $d == 28 && $e == 6 && $a > 10) { // 4 = abril
+                $dia = 18;
+            }
+            $dia -= 2;
+            array_push($festivos, "$dia-$mes");
+
+            $calendario = "<table><tr><th colspan='7'>" . $mesesAno[$mesEscogido - 1] . " - $anoEscogido</th></tr><tr><th>L</th><th>M</th><th>X</th><th>J</th><th>V</th><th>S</th><th>D</th></tr><tr>";
+
             #switch para determinar cuantos dias del mes tiene el escogido por el usuario
             switch ($mesEscogido) {
                 case 1:
@@ -131,8 +161,6 @@ $mesEmpiezaEnDomingo = false;
             $primerDiaSemanaMes = $semana[date("w", mktime(0, 0, 0, $mesEscogido, 1, $anoEscogido))] - 1;
             $x = 8 - $primerDiaSemanaMes; # x dias hasta el comienzo de la proxima semana
 
-            echo "</br>$mesEscogido - $anoEscogido";
-
             if ($primerDiaSemanaMes == 0)
                 $mesEmpiezaEnDomingo = true;
 
@@ -140,7 +168,7 @@ $mesEmpiezaEnDomingo = false;
                 $calendario .= "<td></td>";
             }
             for ($j = 1; $j <= $dias; $j++) {
-                if ($mesEmpiezaEnDomingo == true) { #necesito este if porque sin él, cuando el mes empezaba en domingo se bugeaba la tabla y se descuadraba
+                if ($mesEmpiezaEnDomingo == true) { #necesito este if porque sin él, cu&&o el mes empezaba en domingo se bugeaba la tabla y se descuadraba
                     $calendario .= "<td></td><td></td><td></td><td></td><td></td><td></td><td class='festivo'>$j</td></tr><tr>";
                     $mesEmpiezaEnDomingo = false;
                     $x--;
