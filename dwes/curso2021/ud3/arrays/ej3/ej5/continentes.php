@@ -1,19 +1,19 @@
 <?php
 $continentes = array(
     "Europa" => array(
-        "España" => array("Madrid", "spain.jpg"),
-        "Francia" => array("París", "french.jpg"),
-        "Italia" => array("Roma", "italy.jpg")
+        "España" => array("Madrid", "<img src='pictures/spain.jpg'>"),
+        "Francia" => array("París", "<img src='pictures/french.jpg'>"),
+        "Italia" => array("Roma", "<img src='pictures/italy.jpg'>")
     ),
     "América" => array(
-        "México" => array("Ciudad de México", "mexico.jpg"),
-        "Brasil" => array("Río de Janeiro", "brasil.jpg"),
-        "Canadá" => array("Ottawa", "canada.jpg")
+        "México" => array("Ciudad de México", "<img src='pictures/mexico.jpg'>"),
+        "Brasil" => array("Río de Janeiro", "<img src='pictures/brasil.jpg'>"),
+        "Canadá" => array("Ottawa", "<img src='pictures/canada.jpg'>")
     ),
     "Asia" => array(
-        "Japón" => array("Tokio", "japon.jpg"),
-        "China" => array("Pekin", "china.jpg"),
-        "Corea del Sur" => array("Seúl", "corea.jpg")
+        "Japón" => array("Tokio", "<img src='pictures/japon.jpg'>"),
+        "China" => array("Pekin", "<img src='pictures/china.jpg'>"),
+        "Corea del Sur" => array("Seúl", "<img src='pictures/corea.jpg'>")
     )
 );
 $tabla = "<table><tr><th>CONTINENTES</th></tr><tr><td>Continente</td><td>País</td><td>Capital</td><td>Bandera</td></tr>";
@@ -42,6 +42,10 @@ $tabla = "<table><tr><th>CONTINENTES</th></tr><tr><td>Continente</td><td>País</
         th,
         td {
             padding: 0 10px;
+            border: 1px solid lightgray;
+        }
+        img {
+            width: 20px;
         }
     </style>
 </head>
@@ -51,15 +55,15 @@ $tabla = "<table><tr><th>CONTINENTES</th></tr><tr><td>Continente</td><td>País</
 
     <?php
     foreach ($continentes as $continente => $paises) {
-        // echo $continente;
+
         $tabla .= "<tr><td>$continente</td>";
         foreach ($paises as $pais => $arrayPaises) {
-            $tabla .= "<td>$pais</td>";
-            // echo $pais;
+            $tabla .= "<tr><td></td><td>$pais</td>";
+
             foreach ($arrayPaises as $clave) {
-                // POR AQUI
-                // echo $arrayPaises[0];
+                $tabla .= "<td>$clave</td>";
             }
+            $tabla .= "</tr>";
         }
         $tabla .= "</tr>";
     }
