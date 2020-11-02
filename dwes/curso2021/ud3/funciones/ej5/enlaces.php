@@ -35,6 +35,17 @@ function generaEnlaces($array)
     $tabla .= "</table>";
     echo $tabla;
 }
+
+function muestraTrabajo($titulo, $array) {
+    foreach ($array as $trabajo) {
+        foreach($trabajo as $key => $value) {
+            if ($titulo == $value) {
+                echo "<table></table>";
+                echo $trabajo['Descripcion'];
+            }
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -60,10 +71,11 @@ function generaEnlaces($array)
     <?php
     if (isset($_GET["trabajo"])) {
         $trabajoEscogido = $_GET["trabajo"];
-        // POR AQUI
+        echo muestraTrabajo($trabajoEscogido, $arrayTrabajos);
+        
     } else {
         generaEnlaces($arrayTrabajos);
-        echo "<p>Si quieres que te muestre un trabajo en concreto, escribe en la url el título usando ?trabajo=</p>";
+        echo "<p>Si quieres que te muestre un trabajo en concreto, escribe en la url el título usando ?trabajo=titulo</p>";
     }
     echo "<div id='codigo'><a href='../../../verCodigo.php?src=" . __FILE__ . "'><button>Ver Código</button></a></div>";
     ?>
