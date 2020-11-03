@@ -36,12 +36,12 @@ function generaEnlaces($array)
     echo $tabla;
 }
 
-function muestraTrabajo($titulo, $array) {
+function muestraTrabajo($titulo, $array)
+{
     foreach ($array as $trabajo) {
-        foreach($trabajo as $key => $value) {
+        foreach ($trabajo as $key => $value) {
             if ($titulo == $value) {
-                echo "<table></table>";
-                echo $trabajo['Descripcion'];
+                echo "<table><tr><th>Título del trabajo</th><th>Descripción</th></tr><tr><td>" . $trabajo['Titulo'] . "</td><td>" . $trabajo['Descripcion'] . "</td></tr>";
             }
         }
     }
@@ -62,6 +62,7 @@ function muestraTrabajo($titulo, $array) {
         th,
         td {
             border: 2px solid black;
+            padding: 5px;
         }
     </style>
 </head>
@@ -72,7 +73,6 @@ function muestraTrabajo($titulo, $array) {
     if (isset($_GET["trabajo"])) {
         $trabajoEscogido = $_GET["trabajo"];
         echo muestraTrabajo($trabajoEscogido, $arrayTrabajos);
-        
     } else {
         generaEnlaces($arrayTrabajos);
         echo "<p>Si quieres que te muestre un trabajo en concreto, escribe en la url el título usando ?trabajo=titulo</p>";
