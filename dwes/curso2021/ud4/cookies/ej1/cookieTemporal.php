@@ -1,7 +1,7 @@
 <?php
 function crearCookie()
 {
-    setcookie("galletita", time() + 10, "/");
+    setcookie("galletita", "value galleta", time() + 10);
 }
 
 function estadoCookie()
@@ -15,7 +15,7 @@ function estadoCookie()
 
 function borrarCookie()
 {
-    setcookie("galletita", time(), "/");
+    setcookie("galletita", "value galleta", time() - 3600);
 }
 ?>
 
@@ -39,20 +39,17 @@ function borrarCookie()
         <input type="submit" name="borrar" value="Borrar cookie">
     </form>
     <?php
-    print_r($_REQUEST);
-    // if ($_POST["crear"]) {
-    //     crearCookie();
-    //     echo "creada";
-    // }
-    // if ($_POST["estado"]) {
-    //     estadoCookie();
-    // }
-    // if ($_POST["borrar"]) {
-    //     borrarCookie();
-    // }
+    // print_r($_REQUEST);
+    if (isset($_POST["crear"])) {
+        crearCookie();
+    } else if (isset($_POST["estado"])) {
+        echo estadoCookie();
+    } else if (isset($_POST["borrar"])) {
+        borrarCookie();
+    }
     ?> <?php
-                echo "<div id='codigo'><a href='../../../verCodigo.php?src=" . __FILE__ . "'><button>Ver Código</button></a></div>";
-                ?>
+        echo "<div id='codigo'><a href='../../../verCodigo.php?src=" . __FILE__ . "'><button>Ver Código</button></a></div>";
+        ?>
 </body>
 
 </html>
