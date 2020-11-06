@@ -25,27 +25,21 @@ function borrarCookie()
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ej1 - Cookie temporal</title>
+    <title>Ej4 - Accesos al servidor</title>
     <link rel="stylesheet" type="text/css" href="css/estilos.css" />
     <style>
     </style>
 </head>
 
 <body>
-    <h2>Cookie temporal</h2>
+    <h2>Accesos al servidor.</h2>
     <form action="cookieTemporal.php" method="post">
         <input type="submit" name="crear" value="Crear cookie">
         <input type="submit" name="estado" value="Estado de la cookie">
         <input type="submit" name="borrar" value="Borrar cookie">
     </form>
     <?php
-    if (isset($_POST["crear"])) {
-        crearCookie();
-    } else if (isset($_POST["estado"])) {
-        echo estadoCookie();
-    } else if (isset($_POST["borrar"])) {
-        borrarCookie();
-    }
+
     ?> <?php
         echo "<div id='codigo'><a href='../../../verCodigo.php?src=" . __FILE__ . "'><button>Ver Código</button></a></div>";
         ?>
