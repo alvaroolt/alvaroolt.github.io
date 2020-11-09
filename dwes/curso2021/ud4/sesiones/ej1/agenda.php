@@ -7,7 +7,16 @@ $numero;
 $agenda = "<table><tr><th colspan=3>AGENDA</th></tr>";
 
 if (!isset($_SESSION["arrayContactos"])) {
-    $_SESSION["arrayContactos"] = array();
+    $_SESSION["arrayContactos"] = array(
+        array(
+            "nombre" => "Debora Melo",
+            "numero" => "616123456"
+        ),
+        array(
+            "nombre" => "Zacarias Agua Del Pozo",
+            "numero" => "616123457"
+        )
+    );
 }
 
 function anadirContacto()
@@ -25,6 +34,11 @@ function anadirContacto()
     $_SESSION["arrayContactos"] = array_merge($nuevoContacto, $_SESSION["arrayContactos"]);
 }
 
+function eliminarContacto($contacto)
+{
+    echo $contacto;
+}
+
 function mostrarAgenda($agenda)
 {
     if (!empty($_SESSION["arrayContactos"])) {
@@ -33,29 +47,22 @@ function mostrarAgenda($agenda)
             $agenda .= "<tr>";
             foreach ($contacto as $key => $value) {
                 $agenda .= "<td>$value</td>";
+                if ($key == "nombre") {
+                    $primeraPalabra = explode(' ', trim($value));
+                    $botonContactoRecorrido = "boton" . $primeraPalabra[0];
+                }
             }
-            $agenda .= "<td><button name='boton" . $_SESSION['arrayContactos'][0]['nombre'] . "' id='boton" . $_SESSION['arrayContactos'][0]['nombre'] . "' onclick='eliminarContacto(\"boton" . $_SESSION['arrayContactos'][0]['nombre'] . "\")'><img src='pictures/eliminar.png'></button></td></tr>";
+            // echo $botonContactoRecorrido;
+            $agenda .= "<td><form action='agenda.php' method='post'><button name=$botonContactoRecorrido id=$botonContactoRecorrido><img src='pictures/eliminar.png'></button></form></td></tr>";
         }
         echo $agenda;
-
-
+        if (isset($_POST["$botonContactoRecorrido"])) {
+            eliminarContacto($botonContactoRecorrido);
+            echo "he entrado";
+        }
     } else {
         echo "<p>La agenda está vacía.</p>";
     }
-}
-
-function eliminarContacto($contacto) {
-    echo $contacto;
-
-    // NO CONSIGO QUE SE EJECUTE ESTA FUNCION DESDE LA LINEA 37
-
-    // foreach ($_SESSION["arrayContactos"] as $contacto) {
-        
-    //     foreach ($contacto as $key => $value) {
-            
-    //     }
-        
-    // }
 }
 ?>
 
