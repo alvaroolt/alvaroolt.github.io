@@ -3,16 +3,17 @@ session_start();
 
 $nombre;
 $numero;
-// $arrayContactos = array();
-$agenda = "<table><tr><th colspan=3>AGENDA</th></tr>";
+$agenda = "<table><tr><th colspan=4>AGENDA</th></tr>";
 
 if (!isset($_SESSION["arrayContactos"])) {
     $_SESSION["arrayContactos"] = array(
         array(
+            "id" => 1,
             "nombre" => "Debora Melo",
             "numero" => "616123456"
         ),
         array(
+            "id" => 2,
             "nombre" => "Zacarias Agua Del Pozo",
             "numero" => "616123457"
         )
@@ -23,20 +24,32 @@ function anadirContacto()
 {
     $nombre = $_POST["nombre"];
     $numero = $_POST["numero"];
+    $idMax = count($_SESSION["arrayContactos"]) - 1;
+
+    // var_dump($_SESSION["arrayContactos"][$idMax]["id"]+1);
+    // exit;
 
     $nuevoContacto = array(
-        array(
-            "nombre" => $nombre,
-            "numero" => $numero
-        )
+        "id" => $_SESSION["arrayContactos"][$idMax]["id"] + 1,
+        "nombre" => $nombre,
+        "numero" => $numero
     );
 
-    $_SESSION["arrayContactos"] = array_merge($nuevoContacto, $_SESSION["arrayContactos"]);
+    array_push($_SESSION["arrayContactos"], $nuevoContacto);
 }
 
-function eliminarContacto($contacto)
+function eliminarContacto($contactoABorrar)
 {
-    echo $contacto;
+    $i = 0;
+    while ($i < count($_SESSION["arrayContactos"]) && $_SESSION["arrayContactos"][$i]["id"] != $contactoABorrar) {
+        $i++;
+    }
+    if ($i != count($_SESSION["arrayContactos"])) {
+        unset($_SESSION["arrayContactos"][$i]);
+        $_SESSION["arrayContactos"] = array_merge($_SESSION["arrayContactos"]);
+    } else {
+        echo "<p>No existe el contacto con id $contactoABorrar</p>";
+    }
 }
 
 function mostrarAgenda($agenda)
@@ -47,19 +60,11 @@ function mostrarAgenda($agenda)
             $agenda .= "<tr>";
             foreach ($contacto as $key => $value) {
                 $agenda .= "<td>$value</td>";
-                if ($key == "nombre") {
-                    $primeraPalabra = explode(' ', trim($value));
-                    $botonContactoRecorrido = "boton" . $primeraPalabra[0];
-                }
             }
-            // echo $botonContactoRecorrido;
-            $agenda .= "<td><form action='agenda.php' method='post'><button name=$botonContactoRecorrido id=$botonContactoRecorrido><img src='pictures/eliminar.png'></button></form></td></tr>";
+            $agenda .= "<td><a href='agenda.php?el=" . $contacto["id"] . "'><img src='pictures/eliminar.png'><a/></td></tr>";
         }
+        $agenda .= "</table>";
         echo $agenda;
-        if (isset($_POST["$botonContactoRecorrido"])) {
-            eliminarContacto($botonContactoRecorrido);
-            echo "he entrado";
-        }
     } else {
         echo "<p>La agenda está vacía.</p>";
     }
@@ -103,12 +108,13 @@ function mostrarAgenda($agenda)
         <input type="text" name="numero" id="numero"></br>
         <input type="submit" name="anadir" value="Añadir contacto">
         <input type="submit" name="mostrar" value="Mostrar agenda">
-        <!-- <input type="submit" name="borrar" value="Eliminar todos los contactos"> -->
         <a href="cerrarSesion.php">Borrar todos los contactos</a>
     </form>
     <?php
     if (isset($_POST["anadir"])) {
         anadirContacto();
+    } else if (isset($_GET["el"])) {
+        eliminarContacto($_GET["el"]);
     } else if (isset($_POST["mostrar"])) {
         echo mostrarAgenda($agenda);
     }
