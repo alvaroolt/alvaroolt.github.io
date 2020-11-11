@@ -9,30 +9,44 @@ if (!isset($_SESSION["arrayAlumnos"])) {
     $_SESSION["arrayAlumnos"] = array(
         array(
             "id" => 1,
-            "nombre" => "",
-            "nota" => ""
+            "nombre" => "Álvaro",
+            "notas" => array("1er trimestre" => rand(1, 10), "2º trimestre" => rand(1, 10), "3er trimestre" => rand(1, 10))
         ),
         array(
             "id" => 2,
-            "nombre" => "",
-            "nota" => ""
-        )
+            "nombre" => "Javi",
+            "notas" => array("1er trimestre" => rand(1, 10), "2º trimestre" => rand(1, 10), "3er trimestre" => rand(1, 10))
+        ),
+        array(
+            "id" => 3,
+            "nombre" => "Cristina",
+            "notas" => array("1er trimestre" => rand(1, 10), "2º trimestre" => rand(1, 10), "3er trimestre" => rand(1, 10))
+        ),
+        array(
+            "id" => 4,
+            "nombre" => "Jose Luís",
+            "notas" => array("1er trimestre" => rand(1, 10), "2º trimestre" => rand(1, 10), "3er trimestre" => rand(1, 10))
+        ),
+        array(
+            "id" => 5,
+            "nombre" => "Álvaro",
+            "notas" => array("1er trimestre" => rand(1, 10), "2º trimestre" => rand(1, 10), "3er trimestre" => rand(1, 10))
+        ),
     );
 }
 
 function anadirAlumno()
 {
-    
 }
 
 function eliminarAlumno($contactoABorrar)
 {
-    
 }
 
 function mostrarNotas($tablaNotas)
 {
-    
+
+    return $tablaNotas;
 }
 ?>
 
