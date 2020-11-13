@@ -2,8 +2,11 @@
 session_start();
 
 $nombre;
-$nota;
-$tablaNotas = "<table><tr><th colspan=4>tablaNotas</th></tr>";
+$nota1;
+$nota2;
+$nota3;
+$sumaMedia;
+$tablaNotas = "<table><tr><th colspan=4>Notas DWES</th></tr><tr><td>ID</td><td>Alumno</td><td>Nota</td><td>Nota media</td></tr>";
 
 if (!isset($_SESSION["arrayAlumnos"])) {
     $_SESSION["arrayAlumnos"] = array(
@@ -29,7 +32,7 @@ if (!isset($_SESSION["arrayAlumnos"])) {
         ),
         array(
             "id" => 5,
-            "nombre" => "Álvaro",
+            "nombre" => "Antonio",
             "notas" => array("1er trimestre" => rand(1, 10), "2º trimestre" => rand(1, 10), "3er trimestre" => rand(1, 10))
         ),
     );
@@ -37,15 +40,55 @@ if (!isset($_SESSION["arrayAlumnos"])) {
 
 function anadirAlumno()
 {
+    $nombre = $_POST["nombre"];
+    $nota1 = $_POST["nota1"];
+    $nota2 = $_POST["nota2"];
+    $nota3 = $_POST["nota3"];
+    $idMax = count($_SESSION["arrayAlumnos"]) - 1;
+
+    if (empty($nombre) || empty($nota1) || empty($nota2) || empty($nota3)) {
+        echo "<p>Faltan datos.</p>";
+    } else if(!is_numeric($nota1) || !is_numeric($nota2) || !is_numeric($nota3)) {
+        echo "<p>Has introducido notas no numéricas.</p>";
+    } else {
+        $nuevoAlumno = array(
+            "id" => $_SESSION["arrayAlumnos"][$idMax]["id"] + 1,
+            "nombre" => $nombre,
+            "notas" => array(
+                "1er trimestre" => $nota1,
+                "2º trimestre" => $nota2,
+                "3er trimestre" => $nota3
+            )
+        );
+
+        array_push($_SESSION["arrayAlumnos"], $nuevoAlumno);
+        echo "<p>Alumno añadido correctamente.</p>";
+    }
 }
 
-function eliminarAlumno($contactoABorrar)
+function eliminarAlumno($alumnoAEliminar)
 {
 }
 
 function mostrarNotas($tablaNotas)
 {
-
+    foreach ($_SESSION["arrayAlumnos"] as $alumno) {
+        $tablaNotas .= "<tr>";
+        foreach ($alumno as $atributosAlumno) {
+            if (!is_array($atributosAlumno)) {
+                $tablaNotas .= "<td>$atributosAlumno</td>";
+            } else {
+                $tablaNotas .= "<td><table>";
+                $sumaMedia = 0;
+                foreach ($atributosAlumno as $trimestre => $nota) {
+                    $tablaNotas .= "<tr><td>$trimestre</td><td>$nota</td></tr>";
+                    $sumaMedia += $nota;
+                }
+                $tablaNotas .= "</tr></table></td><td>" . round($sumaMedia / 3, 2) . "</td></tr>";
+            }
+        }
+    }
+    $tablaNotas .= "</table>";
     return $tablaNotas;
 }
 ?>
@@ -80,11 +123,15 @@ function mostrarNotas($tablaNotas)
 
 <body>
     <h2>Gestión académica</h2>
-    <form action="tablaNotas.php" method="post">
+    <form action="gestionAcademica.php" method="post">
         <label for="nombre">Nombre: </label>
         <input type="text" name="nombre" id="nombre"></br>
-        <label for="nota">Nota en DWES: </label>
-        <input type="text" name="nota" id="nota"></br>
+        <label for="nota1">Nota en el primer trimestre: </label>
+        <input type="text" name="nota1" id="nota1"></br>
+        <label for="nota2">Nota en el segundo trimestre: </label>
+        <input type="text" name="nota2" id="nota2"></br>
+        <label for="nota3">Nota en el tercer trimestre: </label>
+        <input type="text" name="nota3" id="nota3"></br>
         <input type="submit" name="anadir" value="Añadir alumno">
         <input type="submit" name="mostrar" value="Mostrar notas">
         <a href="cerrarSesion.php">Borrar la sesión</a>
@@ -97,6 +144,7 @@ function mostrarNotas($tablaNotas)
     } else if (isset($_POST["mostrar"])) {
         echo mostrarNotas($tablaNotas);
     }
+    // echo mostrarNotas($tablaNotas);
     ?> <?php
         echo "<div id='codigo'><a href='../../../verCodigo.php?src=" . __FILE__ . "'><button>Ver Código</button></a></div>";
         ?>
