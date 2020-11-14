@@ -6,7 +6,7 @@ $nota1;
 $nota2;
 $nota3;
 $sumaMedia;
-$tablaNotas = "<table><tr><th colspan=4>Notas DWES</th></tr><tr><td>ID</td><td>Alumno</td><td>Nota</td><td>Nota media</td></tr>";
+$tablaNotas = "<table><tr><th colspan=5>Notas DWES</th></tr><tr><td>ID</td><td>Alumno</td><td>Nota</td><td>Nota media</td></tr>";
 
 if (!isset($_SESSION["arrayAlumnos"])) {
     $_SESSION["arrayAlumnos"] = array(
@@ -48,7 +48,7 @@ function anadirAlumno()
 
     if (empty($nombre) || empty($nota1) || empty($nota2) || empty($nota3)) {
         echo "<p>Faltan datos.</p>";
-    } else if(!is_numeric($nota1) || !is_numeric($nota2) || !is_numeric($nota3)) {
+    } else if (!is_numeric($nota1) || !is_numeric($nota2) || !is_numeric($nota3)) {
         echo "<p>Has introducido notas no numéricas.</p>";
     } else {
         $nuevoAlumno = array(
@@ -68,6 +68,16 @@ function anadirAlumno()
 
 function eliminarAlumno($alumnoAEliminar)
 {
+    $i = 0;
+    while ($i < count($_SESSION["arrayAlumnos"]) && $_SESSION["arrayAlumnos"][$i]["id"] != $alumnoAEliminar) {
+        $i++;
+    }
+    if ($i != count($_SESSION["arrayAlumnos"])) {
+        unset($_SESSION["arrayAlumnos"][$i]);
+        $_SESSION["arrayAlumnos"] = array_merge($_SESSION["arrayAlumnos"]);
+    } else {
+        echo "<p>No existe el alumno con id $alumnoAEliminar</p>";
+    }
 }
 
 function mostrarNotas($tablaNotas)
@@ -84,7 +94,7 @@ function mostrarNotas($tablaNotas)
                     $tablaNotas .= "<tr><td>$trimestre</td><td>$nota</td></tr>";
                     $sumaMedia += $nota;
                 }
-                $tablaNotas .= "</tr></table></td><td>" . round($sumaMedia / 3, 2) . "</td></tr>";
+                $tablaNotas .= "</tr></table></td><td>" . round($sumaMedia / 3, 2) . "</td><td><a href='gestionAcademica.php?el=" . $alumno["id"] . "'><img src='pictures/eliminar.png'><a/></td></tr>";
             }
         }
     }
