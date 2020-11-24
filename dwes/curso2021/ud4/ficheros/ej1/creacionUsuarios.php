@@ -12,50 +12,33 @@ $archivo;
     <title>Ej1 - Script de creación de usuarios</title>
     <link rel="stylesheet" type="text/css" href="css/estilos.css" />
     <style>
-        div {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        img {
-            padding: 20px 5px;
+        label, input {
+            margin: 5px 0;
         }
     </style>
 </head>
 
 <body>
     <h2>Script de creación de usuarios</h2>
-    <form action="galeria.php" method="POST" enctype="multipart/form-data">
-        Añadir imagen: <input name="archivo" id="archivo" type="file" />
-        <input type="submit" name="subir" value="Subir imagen" />
+    <form action="creacionUsuarios.php" method="POST" enctype="multipart/form-data">
+        <label for="nombre">Nombre: </label>
+        <input type="text" name="nombre" id="nombre"></br>
+        <label for="apellido">Apellido: </label>
+        <input type="text" name="apellido" id="apellido"></br>
+        <input type="checkbox" id="option1" name="option1" value="mysql">
+        <label for="option1"> MySQL</label><br>
+        <input type="checkbox" id="option2" name="option2" value="oracle">
+        <label for="option2"> Oracle</label><br>
+        <input type="checkbox" id="option3" name="option3" value="linux">
+        <label for="option3"> Linux</label><br><br>
+        <input type="submit" name="crear" value="Aceptar" />
     </form>
     <?php
-    if (isset($_POST["subir"])) {
-        $archivo = $_FILES["archivo"]["name"];
-        if (isset($archivo) && $archivo != "") {
-            $tipo = $_FILES['archivo']['type'];
-            $tamano = $_FILES['archivo']['size'];
-            $temp = $_FILES['archivo']['tmp_name'];
-            if (!((strpos($tipo, "gif") || strpos($tipo, "jpeg") || strpos($tipo, "jpg") || strpos($tipo, "png")) && ($tamano < 2000000))) {
-                echo '<div><b>Error. La extensión o el tamaño de los archivos no es correcta.<br/>
-                - Se permiten archivos .gif, .jpg, .png. y de 200 kb como máximo.</b></div>';
-            } else {
-                if (move_uploaded_file($temp, 'images/' . $archivo)) {
-                    echo "<p>Imagen subida correctamente.</p>";
-                }
-            }
-        }
+    if (isset($_POST["crear"])) {
+        
     } else {
-        echo "<p>Hubo algún error al subir la imagen.</p>";
+        echo "<p>Hubo algún error al crear el fichero.</p>";
     }
-    $directorio = dir("images");
-    echo "<div>";
-    while (($archivo = $directorio->read()) !== false) {
-        if ((strpos($archivo, "jpg") !== false) || (strpos($archivo, "jpeg") !== false) || (strpos($archivo, "png") !== false))
-            echo "<img src=\"images/" . $archivo . "\" width=\"100px\"><br>";
-    }
-    echo "</div>";
-    $directorio->close();
     echo "<div id='codigo'><a href='../../../verCodigo.php?src=" . __FILE__ . "'><button>Ver Código</button></a></div>";
     ?>
 </body>
