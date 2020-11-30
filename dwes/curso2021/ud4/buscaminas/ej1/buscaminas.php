@@ -5,6 +5,7 @@ $posVertical;
 $posHorizontal;
 $filas;
 $columnas;
+$contador;
 
 if (!isset($_SESSION["tableroMinas"])) {
     $_SESSION["tableroMinas"] = array();
@@ -25,8 +26,6 @@ function rellenarTablero($tablero, $filas, $columnas)
 
 function colocarMinas($tablero)
 {
-    // rellenarTablero($tablero);
-
     $minas = 10;
     while ($minas > 0) {
         $posVertical = rand(1, 9);
@@ -34,6 +33,28 @@ function colocarMinas($tablero)
         if ($tablero[$posVertical][$posHorizontal] != -1) {
             $tablero[$posVertical][$posHorizontal] = -1;
             $minas--;
+        }
+    }
+
+    return $tablero;
+}
+
+function colocarNumeros($tablero, $filas, $columnas)
+{
+    for ($i = 0; $i < $filas; $i++) {
+        for ($j = 0; $j < $columnas; $j++) {
+            // $contador = 0;
+            if ($tablero[$i][$j] != 0) {
+                for ($y = $i-1; $y<=($i+1); $y++) {
+                    for ($x = $j-1; $x<=($j+1); $x++) {
+                        if ($y >= 0 && $x >= 0 && $y < $filas && $x < $columnas) {
+                            if ($tablero[$y][$x] == 0) {
+                                $tablero[$y][$x]++;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -63,9 +84,10 @@ function mostrarTablero($tablero)
     <title>Buscaminas</title>
     <!-- <link rel="stylesheet" type="text/css" href="css/estilos.css" /> -->
     <style>
-        table{
+        table {
             border: 2px solid black;
         }
+
         td {
             border: 1px solid black;
             text-align: center;
@@ -77,8 +99,16 @@ function mostrarTablero($tablero)
 <body>
     <h2>Buscaminas</h2>
     <?php
+    // rellena el array del tablero de ceros (campo sin minas)
     $_SESSION["tableroMinas"] = rellenarTablero($_SESSION["tableroMinas"], 9, 9);
+
+    // coloca -1 que son minas
     $_SESSION["tableroMinas"] = colocarMinas($_SESSION["tableroMinas"]);
+
+    // muestra el tablero
+    mostrarTablero($_SESSION["tableroMinas"]);
+
+    $_SESSION["tableroMinas"] = colocarNumeros($_SESSION["tableroMinas"], 9, 9);
     mostrarTablero($_SESSION["tableroMinas"]);
     ?>
     <a href="cerrarSesion.php">Cerrar sesión</a>

@@ -1,0 +1,51 @@
+body {
+	background-color:#84E082;
+	font-family: 'Roboto';
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+h1 {
+	text-align:center;
+	font-family: 'Anton';
+	text-shadow: 1px 2px #999;
+	line-height: 30px;
+}
+
+.contenedorlistas {
+	display: flex;
+	margin: auto 10%;
+}
+
+.lista {
+	background-color: white;
+	border-radius: 12px;
+	padding: 2%;
+	margin: 2% 0;
+	font-size: 22px;
+	transition: all 0.5s;
+}
+
+p, li{
+	line-height: 40px;
+}
+
+p {
+	font-size: 28px;
+}
+
+li{
+	margin: 2% auto;
+}
+
+footer {
+	margin: 1% 0;
+}
+
+a:link, a:visited, a:active {
+    text-decoration:none;
+}
+
+a{ 
+color: #2B3193; 
+}
