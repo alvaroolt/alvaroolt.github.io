@@ -44,11 +44,11 @@ function colocarNumeros($tablero, $filas, $columnas)
     for ($i = 0; $i < $filas; $i++) {
         for ($j = 0; $j < $columnas; $j++) {
             // $contador = 0;
-            if ($tablero[$i][$j] != 0) {
+            if ($tablero[$i][$j] != -1) {
                 for ($y = $i-1; $y<=($i+1); $y++) {
                     for ($x = $j-1; $x<=($j+1); $x++) {
                         if ($y >= 0 && $x >= 0 && $y < $filas && $x < $columnas) {
-                            if ($tablero[$y][$x] == 0) {
+                            if ($tablero[$y][$x] == -1) {
                                 $tablero[$y][$x]++;
                             }
                         }
