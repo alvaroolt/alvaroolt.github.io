@@ -2,75 +2,129 @@
 <html>
 
 <head>
-    <title>DWES - Alvaro Leiva</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="css/estilos.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto&display=swap" rel="stylesheet">
-    <title>Álvaro Leiva Toledano</title>
+        <title>DWES - Alvaro Leiva</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" type="text/css" href="css/estilos.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto&display=swap" rel="stylesheet">
+        <title>Álvaro Leiva Toledano</title>
 </head>
 
 <body>
-    <noscript>Los scripts están deshabilitados. Es posible que la página no se visualice correctamente.</noscript>
-    <header>
-        <h1>Desarrollo Web en PHP</h1>
-    </header>
-    <h2>UD5 - PHP. Diseño y Desarrollo de Aplicaciones Web.</h2>
+        <noscript>Los scripts están deshabilitados. Es posible que la página no se visualice correctamente.</noscript>
+        <header>
+                <h1>Desarrollo Web en PHP</h1>
+        </header>
+        <h2>UD5 - PHP. Diseño y Desarrollo de Aplicaciones Web.</h2>
 
-    <div class="lista">
-        <ol>
-            <p class="introduccion">Ejercicios POO.</p>
-            <li><a href="poo/ej1/index.php"> Confeccionar una clase Empleado, definir como atributos su nombre y sueldo.
-                    Definir un método inicializar que lleguen como dato el nombre y sueldo. Plantear un segundo método
-                    que imprima el nombre y un mensaje si debe o no pagar impuestos (si el sueldo supera a 3000 paga
-                    impuestos.</a></li>
-            <li><a href="poo/ej2/.php"> Confeccionar una clase Menu. Permitir añadir la cantidad de opciones que
-                    necesitemos. Mostrar el menú en forma horizontal o vertical (según que método llamemos).</a></li>
-            <li><a href="poo/ej3/.php"> Confeccionar una clase Tabla que permita indicarle en el constructor la cantidad
-                    de filas y columnas. Definir otra responsabilidad que podamos cargar un dato en una determinada fila
-                    y columna. Finalmente debe mostrar los datos en una tabla HTML.</a></li>
-            <li><a href="poo/ej4/.php"> Confeccionar la clase Tabla vista en conceptos anteriores. Plantear una clase
-                    Celda que colabore con la clase Tabla. La clase Tabla debe definir una matriz de objetos de la clase
-                    Celda. La clase Celda debe definir los atributos: $texto, $colorFuente y $colorFondo</a></li>
-            <li><a href="poo/ej5/.php"> Confeccionar la clase Tabla vista en conceptos anteriores, añadir un atributo
-                    que defina el borde de la tabla (por defecto "1"). Plantear una clase Celda que colabore con la
-                    clase Tabla. La clase Tabla debe definir una matriz de objetos de la clase Celda.
-                    La clase Celda debe definir los atributos: $texto, $colorFuente y $colorFondo.
-                    En la clase Tabla definir un método insertarCelda que lleve un objeto de la clase Celda y además dos
-                    enteros que indiquen qué posición debe tomar dicha celda en la tabla.</a></li>
-            <li><a href="poo/ej6/.php"> Confeccionar una clase Persona que tenga como atributos el nombre y la edad.
-                    Definir un método que cargue los datos personales y otro que los imprima. Plantear una segunda clase
-                    Empleado que herede de la clase Persona. Añadir un atributo sueldo y los
-                    métodos de cargar el sueldo e imprimir su sueldo. Definir un objeto de la clase Persona y llamar a
-                    sus métodos. También crear un objeto de la clase
-                    Empleado y llamar a sus métodos.</a></li>
-            <li><a href="poo/ej7/.php"> Modificar la clase Persona del ejercicio anterior de manera que el nombre y la
-                    edad sean atributos protegidos. Definir un objeto de la clase Empleado y tratar de modificar el
-                    atributo edad. ¿Qué sucede? ¿Por qué?.</a></li>
-            <li><a href="poo/ej8/.php"> Confeccionar una clase Persona que tenga como atributos el nombre y la edad. El
-                    constructor recibe los datos para inicializar dichos atributos. Otro método imprime los datos.
-                    Plantear una segunda clase Empleado que herede de la clase Persona. Añadir un atributo sueldo y los
-                    métodos de cargar el sueldo e imprimir todos los datos del empleado (sobreescribir el método
-                    imprimir de la clase Persona). El constructor recibe los tres atributos de la clase Empleado. Llamar
-                    al constructor de la clase padre para inicializar los atributos nombre y edad del Empleado.
-                    Definir un objeto de la clase Persona y llamar a sus métodos. También crear un objeto de la clase
-                    Empleado y llamar a sus métodos.</a></li>
-            <li><a href="poo/ej9/.php"> Confeccionar una clase abstracta Persona que tenga como atributos el nombre y la
-                    edad. Definir un método que cargue los datos personales y otro que los imprima. Plantear una segunda
-                    clase Empleado que herede de la clase Persona. Añadir un atributo sueldo y los
-                    métodos de cargar el sueldo e imprimir su sueldo. Definir un objeto de la clase Persona y ver que
-                    error produce. También crear un objeto de la clase
-                    Empleado y llamar a sus métodos.</a></li>
-            <li><a href="poo/ej10/.php"> Plantear una clase Calculadora que contenga cuatro métodos estáticos (sumar,
-                    restar, multiplicar y dividir) que reciben dos valores (los operandos). Crea un script que use esta
-                    clase (adecuadamente).</a></li>
-        </ol>
-    </div>
+        <div class="lista">
+                <ol>
+                        <p class="introduccion">Actividades de clase. POO.</p>
+                        <li><a href="actividadesPoo/ej1/index.php"> Los perros pertenecen a una persona y disponen de un
+                                        chip cuya lectura nos permite conocer raza y edad del perro, así como el nombre
+                                        y teléfono del dueño. El estado de ánimo de la mascota influye en su
+                                        comportamiento y la raza en el carácter e inteligencia.
+                                        Las personas mediante cursos de formación pueden convertirse en instructores con
+                                        una determinad cualificación que determinará la velocidad de aprendizaje de los
+                                        perros que adiestran. Es necesario conocer el nivel de formación de los
+                                        instructores para poder elegir el más adecuado para nuestra mascota.
+                                        Añadir todos aquellos supuestos que permitan enriquecer el modelo: razas de
+                                        perros, nivel de salud, estado de ánimo, veterinarios, etc..
+                                        · Diagrama UML de clases.
+                                        · Códificación de clases PHP.
+                                        · Programa que probar las clases.</a></li>
+                        <li><a href="actividadesPoo/ej2/index.php"> Diseña e implementa un sistema de autentificación de
+                                        usuarios utilizando objetos.</a></li>
+                        <li><a href="actividadesPoo/ej3/.php"> Diseña e implementa un "carrito de la compra" para una
+                                        empresa dedicada a la venta de móviles.</a></li>
+                </ol>
+        </div>
 
-    <footer>
-        &copy; Todos los derechos reservados
-    </footer>
+        <div class="lista">
+                <ol>
+                        <p class="introduccion">Ejercicios POO.</p>
+                        <li><a href="poo/ej1/index.php"> Confeccionar una clase Empleado, definir como atributos su
+                                        nombre y sueldo.
+                                        Definir un método inicializar que lleguen como dato el nombre y sueldo. Plantear
+                                        un segundo método
+                                        que imprima el nombre y un mensaje si debe o no pagar impuestos (si el sueldo
+                                        supera a 3000 paga
+                                        impuestos.</a></li>
+                        <li><a href="poo/ej2/index.php"> Confeccionar una clase Menu. Permitir añadir la cantidad de
+                                        opciones que
+                                        necesitemos. Mostrar el menú en forma horizontal o vertical (según que método
+                                        llamemos).</a></li>
+                        <li><a href="poo/ej3/.php"> Confeccionar una clase Tabla que permita indicarle en el constructor
+                                        la cantidad
+                                        de filas y columnas. Definir otra responsabilidad que podamos cargar un dato en
+                                        una determinada fila
+                                        y columna. Finalmente debe mostrar los datos en una tabla HTML.</a></li>
+                        <li><a href="poo/ej4/.php"> Confeccionar la clase Tabla vista en conceptos anteriores. Plantear
+                                        una clase
+                                        Celda que colabore con la clase Tabla. La clase Tabla debe definir una matriz de
+                                        objetos de la clase
+                                        Celda. La clase Celda debe definir los atributos: $texto, $colorFuente y
+                                        $colorFondo</a></li>
+                        <li><a href="poo/ej5/.php"> Confeccionar la clase Tabla vista en conceptos anteriores, añadir un
+                                        atributo
+                                        que defina el borde de la tabla (por defecto "1"). Plantear una clase Celda que
+                                        colabore con la
+                                        clase Tabla. La clase Tabla debe definir una matriz de objetos de la clase
+                                        Celda.
+                                        La clase Celda debe definir los atributos: $texto, $colorFuente y $colorFondo.
+                                        En la clase Tabla definir un método insertarCelda que lleve un objeto de la
+                                        clase Celda y además dos
+                                        enteros que indiquen qué posición debe tomar dicha celda en la tabla.</a></li>
+                        <li><a href="poo/ej6/.php"> Confeccionar una clase Persona que tenga como atributos el nombre y
+                                        la edad.
+                                        Definir un método que cargue los datos personales y otro que los imprima.
+                                        Plantear una segunda clase
+                                        Empleado que herede de la clase Persona. Añadir un atributo sueldo y los
+                                        métodos de cargar el sueldo e imprimir su sueldo. Definir un objeto de la clase
+                                        Persona y llamar a
+                                        sus métodos. También crear un objeto de la clase
+                                        Empleado y llamar a sus métodos.</a></li>
+                        <li><a href="poo/ej7/.php"> Modificar la clase Persona del ejercicio anterior de manera que el
+                                        nombre y la
+                                        edad sean atributos protegidos. Definir un objeto de la clase Empleado y tratar
+                                        de modificar el
+                                        atributo edad. ¿Qué sucede? ¿Por qué?.</a></li>
+                        <li><a href="poo/ej8/.php"> Confeccionar una clase Persona que tenga como atributos el nombre y
+                                        la edad. El
+                                        constructor recibe los datos para inicializar dichos atributos. Otro método
+                                        imprime los datos.
+                                        Plantear una segunda clase Empleado que herede de la clase Persona. Añadir un
+                                        atributo sueldo y los
+                                        métodos de cargar el sueldo e imprimir todos los datos del empleado
+                                        (sobreescribir el método
+                                        imprimir de la clase Persona). El constructor recibe los tres atributos de la
+                                        clase Empleado. Llamar
+                                        al constructor de la clase padre para inicializar los atributos nombre y edad
+                                        del Empleado.
+                                        Definir un objeto de la clase Persona y llamar a sus métodos. También crear un
+                                        objeto de la clase
+                                        Empleado y llamar a sus métodos.</a></li>
+                        <li><a href="poo/ej9/.php"> Confeccionar una clase abstracta Persona que tenga como atributos el
+                                        nombre y la
+                                        edad. Definir un método que cargue los datos personales y otro que los imprima.
+                                        Plantear una segunda
+                                        clase Empleado que herede de la clase Persona. Añadir un atributo sueldo y los
+                                        métodos de cargar el sueldo e imprimir su sueldo. Definir un objeto de la clase
+                                        Persona y ver que
+                                        error produce. También crear un objeto de la clase
+                                        Empleado y llamar a sus métodos.</a></li>
+                        <li><a href="poo/ej10/.php"> Plantear una clase Calculadora que contenga cuatro métodos
+                                        estáticos (sumar,
+                                        restar, multiplicar y dividir) que reciben dos valores (los operandos). Crea un
+                                        script que use esta
+                                        clase (adecuadamente).</a></li>
+                </ol>
+        </div>
+
+        <footer>
+                &copy; Todos los derechos reservados
+        </footer>
 
 </body>
 
