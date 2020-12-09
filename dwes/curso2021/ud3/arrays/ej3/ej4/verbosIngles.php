@@ -198,14 +198,12 @@ function comprobarAciertos()
     <h2>Verbos irregulares en inglés.</h2>
 
     <?php
-    // mostrarTablaVerbosIrregulares($tablaVerbos);
-    mostrarTablaTarea($tablaTarea);
-    // print_r($_SESSION["verbosIrregulares"]);
-    // print_r($_SESSION["arrayTareaVerbos"]);
+    mostrarTablaVerbosIrregulares($tablaVerbos);
+    // mostrarTablaTarea($tablaTarea);
 
-    if (isset($_POST["aceptar"])) {
-        comprobarAciertos();
-    }
+    // if (isset($_POST["aceptar"])) {
+    //     comprobarAciertos();
+    // }
     ?>
     <a href="cerrarSesion.php">Reiniciar</a>
     <?php
