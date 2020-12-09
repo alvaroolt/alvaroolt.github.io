@@ -1,8 +1,10 @@
 <?php
+
+//Variables
 $nombre;
 $apellidos;
 $correo;
-$genero = array("Hombre", "Mujer");
+$genero = array("Hombre", "Mujer", "Otro");
 $idiomas = array("Español", "Ingles", "Frances");
 $vehiculos = array("Renault", "Mercedes", "Citroen", "Volvo");
 $selected = "";
@@ -10,6 +12,7 @@ $opiniones;
 $url;
 $checkedHombre = "";
 $checkedMujer = "";
+$checkedOtro = "";
 $checkedMarca1 = "";
 $checkedMarca2 = "";
 $checkedMarca3 = "";
@@ -28,7 +31,7 @@ $msgErrorVehiculos;
 $msgErrorOpiniones;
 $msgErrorUrl;
 
-//Boolean que valida el formulario
+//Validar Formulario
 $lProcesarFormulario;
 
 if (isset($_POST["enviar"])) {
@@ -40,48 +43,49 @@ if (isset($_POST["enviar"])) {
     $url = limpiarDatos($_POST["url"]);
 }
 if (empty($_POST["nombre"])) {
-    $msgErrorNombre = "<font color='red'>* Introduzca un nombre.</font>";
+    $msgErrorNombre = "<font color='red'>* Introduzca un nombre. <br></font>";
     $lProcesarFormulario = false;
     $nombre = "";
 }
 
 if (empty($_POST["apellidos"])) {
-    $msgErrorApellidos = "<font color='red'>* Introduzca los Apellidos.</font>";
+    $msgErrorApellidos = "<font color='red'>* Introduzca los Apellidos. <br></font>";
     $lProcesarFormulario = false;
     $apellidos = "";
 }
 
 if (empty($_POST["correo"])) {
-    $msgErrorCorreo = "<font color='red'>* Introduzca un Correo.</font>";
+    $msgErrorCorreo = "<font color='red'>* Introduzca un Correo. <br></font>";
     $lProcesarFormulario = false;
     $correo = "";
 }
 
 if (empty($_POST["genero"])) {
-
-    $msgErrorGenero = "<font color='red'>* Debe de elegir una Opción.</font>";
+    $msgErrorGenero = "<font color='red'>* Debe de elegir una Opción. <br></font>";
     $lProcesarFormulario = false;
-
+    //$genero="";
 } else {
-
     foreach ($_POST["genero"] as $value) {
         if ($value == "Hombre")
             $checkedHombre = 'checked';
+
         else if ($value == "Mujer")
             $checkedMujer = 'checked';
+
+        else if ($value == "Otro")
+            $checkedOtro = 'checked';
     }
 }
 
 if (empty($_POST["idiomas"])) {
-
-    $msgErrorIdiomas = "<font color='red'>* Debe de elegir un idioma como mínimo.</font>";
+    $msgErrorIdiomas = "<font color='red'>* Debe de elegir un idioma como mínimo. <br></font>";
     $lProcesarFormulario = false;
-
+    //$idiomas="";
 } else {
-
     foreach ($_POST["idiomas"] as $value) {
         if ($value == "Español")
             $checkedIdioma1 = 'checked';
+
         else if ($value == "Ingles")
             $checkedIdioma2 = 'checked';
 
@@ -91,11 +95,10 @@ if (empty($_POST["idiomas"])) {
 }
 
 if (empty($_POST["vehiculos"])) {
-
-    $msgErrorVehiculos = "<font color='red'>* Debe de elegir una marca de vehículo como mínimo.</font>";
+    $msgErrorVehiculos = "<font color='red'>* Debe de elegir una marca de vehículo como mínimo. <br></font>";
     $lProcesarFormulario = false;
+    //$vehiculos="";
 } else {
-
     foreach ($_POST["vehiculos"] as $value) {
         if ($value == "Renault")
             $checkedMarca1 = "selected";
@@ -112,13 +115,13 @@ if (empty($_POST["vehiculos"])) {
 }
 
 if (empty($_POST["opiniones"])) {
-    $msgErrorOpiniones = "<font color='red'>* Tamaño Máximo de 10 caracteres.</font>";
+    $msgErrorOpiniones = "<font color='red'>* Tamaño Máximo de 10 caracteres. <br></font>";
     $lProcesarFormulario = false;
     $opiniones = "";
 }
 
 if (empty($_POST["url"])) {
-    $msgErrorUrl = "<font color='red'>* Debe de escribir una URL correcta.</font>";
+    $msgErrorUrl = "<font color='red'>* Debe de escribir una URL correcta. <br></font>";
     $lProcesarFormulario = false;
     $url = "";
 }
@@ -134,33 +137,24 @@ function limpiarDatos($limpiar)
     $error =  htmlspecialchars($limpiar);
     return $error;
 }
-
-
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="author" content="Rafael Miguel Cruz Álvarez">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="css/style.css"> -->
-    <title>Ej2 - Curriculum</title>
-    <style>
-    label, input, textarea{
-        margin: 15px 0;
-    }
-    </style>
+    <link rel="stylesheet" href="/PaginaInicio/css/style.css">
+    <link rel="stylesheet" href="/PaginaInicio/css/normalize.css">
+    <title>Ejercicio 2</title>
 </head>
 
 <body>
     <section>
         <?php
         if ($lProcesarFormulario) {
-            echo "<h1>Curriculum</h1>";
+            echo "<h1>Ejercicio 2: Curriculum</h1>";
             echo "Los datos son: </br>";
             echo "<b>Nombre: </b>" . $nombre . "</br>";
             echo "<b>Apellidos: </b>" . $apellidos . "</br>";
@@ -174,10 +168,10 @@ function limpiarDatos($limpiar)
             echo "</br><b>Marca de Coches: </b>";
             foreach ($_POST["vehiculos"] as $seleccionado)
                 echo $seleccionado . " ";
-            echo "Opiniones" . $opiniones;
+            echo "</br><b>Opiniones: </b>" . $opiniones . "</br>";
             echo "<b>URL: </b>" . $url . "</br>";
         } else {
-            echo "<h1>Curriculum</h1>";
+            echo "<h1>Ejercicio 2: Curriculum</h1>";
             echo "<form action='curriculum.php' method=\"post\">";
             echo "<br/><br/>";
             echo "<label >Nombre: <input type='text' name='nombre' value='$nombre'></input></label>";
@@ -192,7 +186,7 @@ function limpiarDatos($limpiar)
             else {
                 echo "</br>";
             }
-            echo "<label >Correo: <input type='email' name='correo' value='$correo'></input></label>";
+            echo "<label >Correo: <input type='email' name='correo' value='$correo' placeholder='ejemplo@ejemplo'></input></label>";
             if (empty($_POST["correo"]))
                 echo $msgErrorCorreo . "</br>";
             else {
@@ -201,6 +195,7 @@ function limpiarDatos($limpiar)
             echo "<label >Género:";
             echo "<input type='radio' name='genero[]' value='Hombre' $checkedHombre >Hombre";
             echo "<input type='radio' name='genero[]' value='Mujer'$checkedMujer >Mujer";
+            echo "<input type='radio' name='genero[]' value='Otro' $checkedOtro >Otro";
 
             echo "</label>";
             if (empty($_POST["genero"]))
@@ -233,10 +228,10 @@ function limpiarDatos($limpiar)
             else {
                 echo "</br>";
             }
-            echo "<label>
-                        Opiniones:
-                                <textarea name='opiniones' cols='40' rows='5' maxlength='10'></textarea>
-                </label>";
+            echo "<label >
+                       Opiniones:
+                           <textarea name='opiniones' cols='40' rows='5' maxlength='10' value='$opiniones'></textarea>
+                   </label>";
             if (empty($_POST["opiniones"]))
                 echo $msgErrorOpiniones . "</br>";
             else {
