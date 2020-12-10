@@ -1,5 +1,9 @@
 <?php
-// include "funciones.php";
+include "config/arrayPreguntas.php";
+include "config/funciones.php";
+// print_r($aTests);
+
+$fallos = "";
 ?>
 
 <!DOCTYPE html>
@@ -8,35 +12,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XXX</title>
+    <meta name="author" content="Álvaro Leiva Toledano">
+    <title>Examen - Autoescuela</title>
     <link rel="stylesheet" type="text/css" href="css/estilos.css" />
     <style>
-        
+        .noApto {
+            color: red;
+        }
+        .apto {
+            color: green;
+        }
     </style>
 </head>
 
 <body>
-    <h2>XXX</h2>
-    <!-- <form action="agenda.php" method="post">
-        <label for="nombre">Nombre: </label>
-        <input type="text" name="nombre" id="nombre"></br>
-        <label for="numero">Número: </label>
-        <input type="text" name="numero" id="numero"></br>
-        <input type="submit" name="anadir" value="Añadir contacto">
-        <input type="submit" name="mostrar" value="Mostrar agenda"> -->
-        <a href="cerrarSesion.php">Borrar todos los contactos</a>
-    <!-- </form> -->
+    <h2>Test autoescuela - Álvaro Leiva Toledano</h2>
     <?php
-    // if (isset($_POST["anadir"])) {
-    //     anadirContacto();
-    // } else if (isset($_GET["el"])) {
-    //     eliminarContacto($_GET["el"]);
-    // } else if (isset($_POST["mostrar"])) {
-    //     echo mostrarAgenda($agenda);
-    // }
-    ?> <?php
-        echo "<div id='codigo'><a href='verCodigo.php?src=" . __FILE__ . "'><button>Ver Código</button></a></div>";
-        ?>
+
+    if (!isset($_COOKIE["ultimoTest"])) {
+        mostrarTest(1);
+        crearCookie("ultimoTest", 1);
+    } else {
+        mostrarTest($nTest);
+    }
+
+    if (isset($_POST["Enviar"])) {
+        echo "</br>Tuviste " . comprobarFallos() . " fallos en el último test.";
+        if (comprobarFallos() >2) {
+            echo "<p class='noApto'>No apto.</p>";
+        } else {
+            echo "<p class='apto'>Apto.</p>";
+        }
+    }
+    ?>
+    <a href="config/borrarCookie.php">Reiniciar</a>
 </body>
 
 </html>
