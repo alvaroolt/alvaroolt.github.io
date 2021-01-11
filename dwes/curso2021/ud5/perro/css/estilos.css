@@ -1,3 +1,11 @@
+div{
+    display: flex;
+}
 input[type=submit] {
     margin: 10px;
+}
+
+.botonesPerro{
+    margin: 2px;
+    text-align: center;
 }
