@@ -10,19 +10,19 @@ class Empleado
         $this->_sueldo = $sueldo;
     }
 
-    private function set_nombre($nombre)
-    {
-        $this->_nombre = $nombre;
-    }
+    // private function set_nombre($nombre)
+    // {
+    //     $this->_nombre = $nombre;
+    // }
     public function get_nombre()
     {
         return $this->_nombre;
     }
 
-    private function set_sueldo($sueldo)
-    {
-        $this->_sueldo = $sueldo;
-    }
+    // private function set_sueldo($sueldo)
+    // {
+    //     $this->_sueldo = $sueldo;
+    // }
     public function get_sueldo()
     {
         return $this->_sueldo;
