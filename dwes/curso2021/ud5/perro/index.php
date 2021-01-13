@@ -51,7 +51,7 @@ $_SESSION["sesion"] = true; //
     if (isset($_POST["nuevoPerro"])) {
         echo "<h3>Formulario - añadir nuevo perro</h3>";
         echo "<form action='index.php' method='post'>";
-        echo "<p><label>Nombre: <input type='text' name='nombre' required></label></p>";
+        echo "<p><label>Nombre: <input type='text' name='nombrePerro' required></label></p>";
         echo "<p><label>Raza: <input type='text' name='raza' required></label></p>";
         echo "<p><label>Edad: <input type='number' name='edad' required></label></p>";
         echo "<p><label>Nombre del dueño: <input type='text' name='nombreDueno' required></label></p>";
@@ -64,8 +64,13 @@ $_SESSION["sesion"] = true; //
             </select></p>";
         echo "<input type='submit' name='anadirPerro' value='Añadir perro'>";
         echo "</form>";
-        // } elseif(isset($_POST["instructorNuevo"])) {
-        //     echo "<h3>Formulario - añadir nuevo instructor</h3>";
+    } elseif (isset($_POST["instructorNuevo"])) {
+        echo "<h3>Formulario - añadir nuevo instructor</h3>";
+        echo "<form action='index.php' method='post'>";
+        echo "<p><label>Nombre: <input type='text' name='nombreInstructor' required></label></p>";
+        echo "<p><label>Nivel de formación: <input type='text' name='nivFormacion' required></label></p>";
+        echo "<input type='submit' name='anadirInstructor' value='Añadir instructor'>";
+        echo "</form>";
     } elseif (isset($_POST["mostrarPerros"])) {
         if (!empty($_SESSION["arrayPerros"])) {
             echo "<form action='index.php' method='post'>";
@@ -75,7 +80,8 @@ $_SESSION["sesion"] = true; //
                 foreach ($perro as $clave => $valor) {
                     echo "<tr><td>";
                     switch ($clave) {
-                        case "nombre":
+                        case "nombrePerro":
+                            $nombrePerro = $valor;
                             echo "Nombre: $valor";
                             break;
                         case "raza":
@@ -100,7 +106,8 @@ $_SESSION["sesion"] = true; //
                 echo "<tr class='botonesPerro'><td><input class='botonPerro' type='submit' name='botonJugar' value='Jugar'></td></tr>";
                 echo "<tr class='botonesPerro'><td><input class='botonPerro' type='submit' name='botonComer' value='Comer'></td></tr>";
                 echo "<tr class='botonesPerro'><td><input class='botonPerro' type='submit' name='botonDucha' value='¡Duchita!'></td></tr>";
-                echo "</table>";
+                echo "<input type='hidden' name='nombrePerro' value=$nombrePerro />";
+                echo "</table></td>";
             }
             echo "</table>";
         }
@@ -109,7 +116,7 @@ $_SESSION["sesion"] = true; //
 
     if (isset($_POST["anadirPerro"])) {
         $nuevoPerro = array(
-            "nombre" => $_POST["nombre"],
+            "nombrePerro" => $_POST["nombrePerro"],
             "raza" => $_POST["raza"],
             "edad" => $_POST["edad"],
             "nombreDueno" => $_POST["nombreDueno"],
@@ -119,6 +126,28 @@ $_SESSION["sesion"] = true; //
 
         array_push($_SESSION["arrayPerros"], new Perro($nuevoPerro));
         echo "<p>Nuevo perro agregado correctamente.</p>";
+    } elseif (isset($_POST[""])) {
+        //
+    }
+
+    if (isset($_POST["botonJugar"])) {
+        foreach ($_SESSION["arrayPerros"] as $perro) {
+            if ($perro->getNombrePerro() == $_POST["nombrePerro"]) {
+                $perro->jugar();
+            }
+        }
+    } elseif (isset($_POST["botonComer"])) {
+        foreach ($_SESSION["arrayPerros"] as $perro) {
+            if ($perro->getNombrePerro() == $_POST["nombrePerro"]) {
+                $perro->comer();
+            }
+        }
+    } elseif (isset($_POST["botonDucha"])) {
+        foreach ($_SESSION["arrayPerros"] as $perro) {
+            if ($perro->getNombrePerro() == $_POST["nombrePerro"]) {
+                $perro->ducha();
+            }
+        }
     }
 
     ?>

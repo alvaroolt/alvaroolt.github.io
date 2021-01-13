@@ -7,7 +7,7 @@
 
 class Perro
 {
-    public $nombre;
+    public $nombrePerro;
     public $raza;
     public $edad;
     public $nombreDueno;
@@ -16,7 +16,7 @@ class Perro
 
     public function __construct($arrayDatos)
     {
-        $this->nombre = $arrayDatos['nombre'];
+        $this->nombrePerro = $arrayDatos['nombrePerro'];
         $this->raza = $arrayDatos['raza'];
         $this->edad = $arrayDatos['edad'];
         $this->nombreDueno = $arrayDatos['nombreDueno'];
@@ -24,9 +24,9 @@ class Perro
         $this->estAnimo = $arrayDatos['estAnimo'];
     }
 
-    public function getNombre()
+    public function getnombrePerro()
     {
-        return $this->nombre;
+        return $this->nombrePerro;
     }
 
     public function getRaza()
@@ -39,7 +39,7 @@ class Perro
         return $this->edad;
     }
 
-    public function getNombreDueno()
+    public function getnombreDueno()
     {
         return $this->nombreDueno;
     }
@@ -60,7 +60,9 @@ class Perro
     // metodos de los perros
 
     public function jugar() {
+        echo "</br>" . $this->nombrePerro . " está jugando.";
         if ($this->edad > 10) {
+            echo "</br>" . $this->nombrePerro . " es muy mayor para jugar...";
             $this->estAnimo = 'cabreado';
         } else {
             $this->estAnimo = 'feliz';
@@ -68,10 +70,12 @@ class Perro
     }
 
     public function comer() {
+        echo "</br>" . $this->nombrePerro . " está comiendo.";
         $this->estAnimo = 'feliz';
     }
 
     public function ducha() {
+        echo "</br>Han duchado a " . $this->nombrePerro . ". Pobre... no le gusta mucho.";
         $this->estAnimo = 'triste';
     }
 }
