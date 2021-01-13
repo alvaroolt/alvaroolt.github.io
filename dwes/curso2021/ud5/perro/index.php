@@ -34,7 +34,7 @@ $_SESSION["sesion"] = true; //
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>POO - Perro</title>
-    <link rel="stylesheet" type="text/css" href="css/estilos.css" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
 </head>
 
 <body>
@@ -97,12 +97,9 @@ $_SESSION["sesion"] = true; //
                     echo "</td></tr>";
                 }
 
-                // CONTINUAR DESDE AQUI, XAMPP ESTA BUG Y NO ME REFRESCA LA PAGINA
-                echo "<div>";
-                echo "<tr><td><input class='botonesPerro' type='submit' name='botonJugar' value='Jugar'></td></tr>";
-                echo "<tr><td><input class='botonesPerro' type='submit' name='botonComer' value='Comer'></td></tr>";
-                echo "<tr><td><input class='botonesPerro' type='submit' name='botonDucha' value='¡Duchita!'></td></tr>";
-                echo "</div>";
+                echo "<tr class='botonesPerro'><td><input class='botonPerro' type='submit' name='botonJugar' value='Jugar'></td></tr>";
+                echo "<tr class='botonesPerro'><td><input class='botonPerro' type='submit' name='botonComer' value='Comer'></td></tr>";
+                echo "<tr class='botonesPerro'><td><input class='botonPerro' type='submit' name='botonDucha' value='¡Duchita!'></td></tr>";
                 echo "</table>";
             }
             echo "</table>";

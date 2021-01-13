@@ -1,0 +1,9 @@
+.botonesPerro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type=submit] {
+    margin: 10px;
+}
