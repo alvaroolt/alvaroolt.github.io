@@ -26,4 +26,9 @@ class Instructor
     public function setNivFormacion($nivFormacion) {
         $this->nivFormacion = $nivFormacion;
     }
+
+    public function estudiar() {
+        echo "</br>" . $this->nombre . " está estudiando.";
+        $this->nivFormacion++;
+    }
 }

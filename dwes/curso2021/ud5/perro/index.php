@@ -68,7 +68,7 @@ $_SESSION["sesion"] = true; //
         echo "<h3>Formulario - añadir nuevo instructor</h3>";
         echo "<form action='index.php' method='post'>";
         echo "<p><label>Nombre: <input type='text' name='nombreInstructor' required></label></p>";
-        echo "<p><label>Nivel de formación: <input type='text' name='nivFormacion' required></label></p>";
+        echo "<p><label>Nivel de formación: <input type='number' name='nivFormacion' required></label></p>";
         echo "<input type='submit' name='anadirInstructor' value='Añadir instructor'>";
         echo "</form>";
     } elseif (isset($_POST["mostrarPerros"])) {
@@ -112,6 +112,16 @@ $_SESSION["sesion"] = true; //
             echo "</table>";
         }
     } elseif (isset($_POST["mostrarInstructores"])) {
+        if (!empty($_SESSION["arrayInstructores"])) {
+            echo "<form action='index.php' method='post'>";
+            echo "<table border='2px solid black'>";
+            foreach ($_SESSION["arrayInstructores"] as $instructor) {
+                echo "<tr><td><table>";
+                foreach ($instructor as $clave => $valor) {
+
+                }
+            }
+        }
     }
 
     if (isset($_POST["anadirPerro"])) {
@@ -126,8 +136,10 @@ $_SESSION["sesion"] = true; //
 
         array_push($_SESSION["arrayPerros"], new Perro($nuevoPerro));
         echo "<p>Nuevo perro agregado correctamente.</p>";
-    } elseif (isset($_POST[""])) {
-        //
+    }
+
+    if (isset($_POST["anadirInstructor"])) {
+        echo "<p>Nuevo instructor agregado correctamente.</p>";
     }
 
     if (isset($_POST["botonJugar"])) {
