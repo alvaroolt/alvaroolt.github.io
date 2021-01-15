@@ -16,10 +16,10 @@
         public $mensaje = '';
 
         //Métodos abstractos:
-        // abstract protected function get();
-        // abstract protected function set();
-        // abstract protected function edit();
-        // abstract protected function delete();
+        abstract protected function get();
+        abstract protected function set();
+        abstract protected function edit();
+        abstract protected function delete();
 
         //Crear conexión a la base de datos:
         protected function open_connection() {
