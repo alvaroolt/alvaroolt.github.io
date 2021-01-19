@@ -29,10 +29,12 @@ class Superheroe extends DBAbstractModel
     {
         $this->nombre = $nombre;
     }
+
     public function getNombre()
     {
         return $this->nombre;
     }
+
     public function set($user_data = array())
     {
         foreach ($user_data as $campo => $valor) {
@@ -46,16 +48,10 @@ class Superheroe extends DBAbstractModel
         //$this->execute_single_query();
         $this->mensaje = 'Superheroe agregado exitosamente';
     }
+
     // public function get($user_data = array())
     // {
     // }
-    public function edit($user_data = array())
-    {
-    }
-    public function delete($user_data = array())
-    {
-    }
-
     public function get($id = '')
     {
         if ($id != '') {
@@ -74,5 +70,13 @@ class Superheroe extends DBAbstractModel
             $this->mensaje = 'sh no encontrado';
         }
         return $this->rows;
+    }
+
+    public function edit($user_data = array())
+    {
+    }
+
+    public function delete($user_data = array())
+    {
     }
 }
