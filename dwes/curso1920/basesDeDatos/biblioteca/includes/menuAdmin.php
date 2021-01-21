@@ -1,0 +1,11 @@
+<?php
+
+
+echo '
+<ul>
+  <li><a href="../pages/libros.php">Libros</a></li>
+  <li><a href="../pages/usuarios.php">Usuarios</a></li>
+  <li><a href="../pages/prestamos.php">Préstamos</a></li>
+</ul>';
+
+?>

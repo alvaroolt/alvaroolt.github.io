@@ -118,7 +118,7 @@ $_SESSION["sesion"] = true; //
             foreach ($_SESSION["arrayInstructores"] as $instructor) {
                 echo "<tr><td><table>";
                 foreach ($instructor as $clave => $valor) {
-
+                    //FALTA ESTO Y LOS BOTONES DE INSTRUCTOR
                 }
             }
         }
