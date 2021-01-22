@@ -11,15 +11,15 @@
         //Manejo de consultas:
         protected $query;
         protected $parametros = array();
-        protected $rows = array();
+        protected $rows = array(); // array con las tuplas que devuelve la consulta
 
         public $mensaje = '';
 
         //Métodos abstractos:
-        abstract protected function get();
-        abstract protected function set();
-        abstract protected function edit();
-        abstract protected function delete();
+        abstract protected function get($id);
+        abstract protected function set($datos);
+        abstract protected function edit($datos);
+        abstract protected function delete($id);
 
         //Crear conexión a la base de datos:
         protected function open_connection() {
@@ -37,6 +37,10 @@
         //Desconectar la base de datos:
         protected function close_connection() {
             $this->conn = null;
+        }
+
+        public function lastInsert() {
+            return $this->conn->lastInsertId();
         }
 
         //Ejecuta resultados de una consulta en un array:
@@ -67,7 +71,4 @@
             }
             //return $_result;
         }
-        // public function lastInsert(){
-        //     return $this->conn->lastInsertID();
-        // }
     }
