@@ -5,16 +5,31 @@ class Superheroe extends DBAbstractModel
 {
     private static $instancia;
 
-    private $id;
-    private $nombre;
-    private $velocidad;
-    private $created_at;
-    private $updated_at;
+    private $_id;
+    private $_nombre;
+    private $_velocidad;
+    private $_created_at;
+    private $_updated_at;
+
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+    }
+
+    public function setVelocidad($velocidad)
+    {
+        $this->velocidad = $velocidad;
+    }
+
+    public function getSuperheroes()
+    {
+        $this->query = "SELECT * FROM superheroes";
+    }
 
     public static function getInstancia()
     {
         if (!isset(self::$instancia)) {
-            $miClase = __CLASS__;
+            $miClase = _CLASS_;
             self::$instancia = new $miClase;
         }
         return self::$instancia;
@@ -23,16 +38,6 @@ class Superheroe extends DBAbstractModel
     public function __clone()
     {
         trigger_error('La clonación no es permitida.', E_USER_ERROR);
-    }
-
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
-    }
-
-    public function getNombre()
-    {
-        return $this->nombre;
     }
 
     public function set($user_data = array())
@@ -49,34 +54,45 @@ class Superheroe extends DBAbstractModel
         $this->mensaje = 'Superheroe agregado exitosamente';
     }
 
-    // public function get($user_data = array())
-    // {
-    // }
-    public function get($id = '')
+    public function get($id = "")
     {
-        if ($id != '') {
-            $this->query = "SELECT * FROM superheroes WHERE id = :i";
-
-            $this->parametros['id'] = $id;
-            $this->get_results_from_query();
+        if ($id != "") {
+            $this->query = "SELECT * FROM superheroes WHERE id =:id";
         }
+        $this->parametros["id"] = $id; // carga de parámetros
+        $this->get_results_from_query(); // ejecución de la consulta que devuelve registros
 
         if (count($this->rows) == 1) {
             foreach ($this->rows[0] as $propiedad => $valor) {
                 $this->$propiedad = $valor;
             }
-            $this->mensaje = 'sh encontrado';
+            $this->mensaje = 'Superhéroe encontrado';
         } else {
-            $this->mensaje = 'sh no encontrado';
+            $this->mensaje = 'Superhéroe no encontrado';
         }
         return $this->rows;
     }
 
     public function edit($user_data = array())
     {
+        foreach ($user_data as $campo => $valor) {
+            $$campo = $valor;
+        }
+        $this->query = "UPDATE superheroes SET nombre=:nombre, velocidad=:velocidad";
+
+        // this->parametros["id"] = $id;
+        $this->parametros["nombre"] = $nombre;
+        $this->parametros["velocidad"] = $velocidad;
+
+        $this->get_results_from_query();
+        $this->mensaje = "Superhéroe encontrado";
     }
 
-    public function delete($user_data = array())
+    public function delete($id = "")
     {
+        $this->query = "DELETE FROM superheroes WHERE id=:id";
+        $this->parametros["id"] = $id;
+        $this->get_results_from_query();
+        $this->mensaje = "Superhéroe eliminado de la base de datos.";
     }
 }
