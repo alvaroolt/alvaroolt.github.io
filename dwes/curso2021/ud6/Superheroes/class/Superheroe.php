@@ -5,11 +5,11 @@ class Superheroe extends DBAbstractModel
 {
     private static $instancia;
 
-    private $_id;
-    private $_nombre;
-    private $_velocidad;
-    private $_created_at;
-    private $_updated_at;
+    private $id;
+    private $nombre;
+    private $velocidad;
+    private $created_at;
+    private $updated_at;
 
     public function setNombre($nombre)
     {
@@ -38,6 +38,28 @@ class Superheroe extends DBAbstractModel
     public function __clone()
     {
         trigger_error('La clonación no es permitida.', E_USER_ERROR);
+    }
+
+    public function buscarPorNombre($buscar = "")
+    {
+        if ($buscar != '') {
+            $this->query = "SELECT * FROM superheroes WHERE nombre LIKE :filtro";
+            $this->parametros["filtro"] = "%" . $buscar . "%";
+            $this->get_results_from_query();
+        }
+        return $this->rows;
+    }
+
+    public function getMessage()
+    {
+        return $this->mensaje;
+    }
+
+    public function getAll()
+    {
+        $this->query = "SELECT * FROM superheroes";
+        $this->get_results_from_query();
+        return $this->rows;
     }
 
     public function set($user_data = array())
