@@ -1,7 +1,7 @@
 <?php
 
-include "../app/Models/Blog.php";
-include "../app/Models/Comment.php";
+include "app/Models/Blog.php";
+include "app/Models/Comment.php";
 
 $blog1 = new Blog();
 $blog1->setTitle('A day with Symfony2');

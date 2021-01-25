@@ -15,6 +15,7 @@ class Blog
     public $tags;
     public $created;
     public $updated;
+    public $comments = array();
 
     // public function __construct($arrayDatos)
     // {
@@ -108,7 +109,12 @@ class Blog
         $this->updated = $updated;
     }
 
-    public function addComment($comment) {
-        // no se jaja
+    public function addComment($comment)
+    {
+        array_push($this->comments, $comment);
+    }
+
+    public function getNumComments(){
+        return sizeof($this->comments);
     }
 }

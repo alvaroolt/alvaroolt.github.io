@@ -1,3 +1,7 @@
+<?php
+include "datos/datos.php";
+// include "app/Models/Blog.php";
+?>
 <!DOCTYPE html>
 <html>
 
@@ -30,25 +34,31 @@
         </header>
         <section class="main-col">
 
-            <article class="blog">
-                <div class="date">'
-                    <time datetime=" "> </time>
+            <?php
+            $contador = 0;
+            foreach ($blogs as $blog) {
+                $contador++;
+                echo "<article class=\"blog\">
+                <div class=\"date\">'
+                    <time datetime=\" \">" . date_format($blog->getCreated(), 'Y-m-d H:i:s') . "</time>
                 </div>
                 <header>
-                    <h2><a href="show_sb.php?id=n"> Titulo blog </a></h2>
+                    <h2><a href=\"show.php?id=$contador\">" . $blog->getTitle() . "</a></h2>
                 </header>'
-                <img src="img/imagen" />
-                <div class="snippet">
-                    <p> blog </p>'
-                    <p class="continue"><a href="#">Continue reading...</a></p>
+                <img src=\"img/". $blog->getImage() . "\" />
+                <div class=\"snippet\">
+                    <p>" . $blog->getBlog() . "</p>'
+                    <p class=\"continue\"><a href=\"#\">Continue reading...</a></p>
                 </div>'
-                <footer class="meta">'
-                    <p>Comments: <a href="#"> Numero comentarios </a></p>
-                    <p>Posted by <span class="highlight">dsyph3r</span> at 07:06PM</p>
-                    <p>Tags: <span class="highlight">symfony2, php, paradise, symblog</span></p>
+                <footer class=\"meta\">'
+                    <p>Comments: <a href=\"#\">" . $blog->getNumComments() . "</a></p>
+                    <p>Posted by <span class=\"highlight\">" . $blog->getAuthor() . "</span> at" . date_format($blog->getCreated(), 'H:i:s') . "</p>
+                    <p>Tags: <span class=\"highlight\">" . $blog->getTags() . "</span></p>
                 </footer>
-            </article>
-            
+            </article>";
+            }
+            ?>
+
         </section>
         <aside class="sidebar">
             <section class="section">
