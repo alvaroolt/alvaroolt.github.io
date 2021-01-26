@@ -2,7 +2,7 @@
 define("DBHOST", "localhost");
 define("DBUSER", "root");
 define("DBPASS", "");
-define("DBNAME", "superheroes");
+define("DBNAME", "symblog");
 define("DBPORT", 3306);
 
 // DESDE CASA
@@ -10,5 +10,5 @@ define("DBPORT", 3306);
 // define("DBPASS", "");
 
 // DESDE CLASE
-// define("DBUSER", "superheroes");
-// define("DBPASS", "superheroes");
+// define("DBUSER", "symblog");
+// define("DBPASS", "symblog");

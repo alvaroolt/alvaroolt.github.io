@@ -1,6 +1,5 @@
 <?php
 include "datos/datos.php";
-include "app/Models/Blog.php";
 
 $bl = Blog::getInstancia();
 

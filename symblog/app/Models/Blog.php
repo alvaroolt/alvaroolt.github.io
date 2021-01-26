@@ -152,7 +152,7 @@ class Blog extends DBAbstractModel
         // $this->parametros['updated'] = $user_data["updated"];
         // $this->parametros['comments'] = $user_data["comments"];
         // $this->get_results_from_query();
-        // //$this->execute_single_query();
+        // $this->execute_single_query();
         // $this->mensaje = 'Superheroe agregado exitosamente';
     }
 
@@ -166,5 +166,18 @@ class Blog extends DBAbstractModel
 
     public function delete($id = "")
     {
+    }
+
+    public function guardaBD()
+    {
+        $this->query = "INSERT INTO blogs (title, author, blog, image, tags) VALUES (:title, :author, :blog, :image, :tags)";
+        $this->parametros['title'] = $this->title;
+        $this->parametros['author'] = $this->author;
+        $this->parametros['blog'] = $this->blog;
+        $this->parametros['image'] = $this->image;
+        $this->parametros['tags'] = $this->tags;
+        // $this->parametros['comments'] = $this->comments;
+        $this->get_results_from_query();
+        $this->mensaje = 'Superheroe agregado exitosamente';
     }
 }
