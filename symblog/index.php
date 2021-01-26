@@ -1,6 +1,9 @@
 <?php
 include "datos/datos.php";
-// include "app/Models/Blog.php";
+include "app/Models/Blog.php";
+
+$bl = Blog::getInstancia();
+
 ?>
 <!DOCTYPE html>
 <html>

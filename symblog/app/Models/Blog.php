@@ -1,12 +1,10 @@
 <?php
+require_once('DBAbstractModel.php');
 
-/**
- * Clase Blog
- * @author Álvaro Leiva Toledano
- */
-
-class Blog
+class Blog extends DBAbstractModel
 {
+    private static $instancia;
+
     public $id;
     public $title;
     public $author;
@@ -29,15 +27,15 @@ class Blog
     //     $this->updated = $arrayDatos['updated'];
     // }
 
-    // public function getId()
-    // {
-    //     return $this->id;
-    // }
+    public function getId()
+    {
+        return $this->id;
+    }
 
-    // public function setId($id)
-    // {
-    //     $this->id = $id;
-    // }
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     public function getTitle()
     {
@@ -114,7 +112,59 @@ class Blog
         array_push($this->comments, $comment);
     }
 
-    public function getNumComments(){
+    public function getNumComments()
+    {
         return sizeof($this->comments);
+    }
+
+    public static function getInstancia()
+    {
+        if (!isset(self::$instancia)) {
+            $miClase = __CLASS__;
+            self::$instancia = new $miClase;
+        }
+        return self::$instancia;
+    }
+
+    public function __clone()
+    {
+        trigger_error('La clonación no es permitida.', E_USER_ERROR);
+    }
+
+    public function getMessage()
+    {
+        return $this->mensaje;
+    }
+
+    public function set($user_data = array())
+    {
+        // foreach ($user_data as $campo => $valor) {
+        //     $$campo = $valor;
+        // }
+        // $this->query = "INSERT INTO blogs (title, author, blog, image, tags, created, updated, comments) VALUES 
+        // (:title, :author, :blog, :image, :tags, :created, :updated, :comments)";
+        // $this->parametros['title'] = $user_data["title"];
+        // $this->parametros['author'] = $user_data["author"];
+        // $this->parametros['blog'] = $user_data["blog"];
+        // $this->parametros['image'] = $user_data["image"];
+        // $this->parametros['tags'] = $user_data["tags"];
+        // $this->parametros['created'] = $user_data["created"];
+        // $this->parametros['updated'] = $user_data["updated"];
+        // $this->parametros['comments'] = $user_data["comments"];
+        // $this->get_results_from_query();
+        // //$this->execute_single_query();
+        // $this->mensaje = 'Superheroe agregado exitosamente';
+    }
+
+    public function get($id = "")
+    {
+    }
+
+    public function edit($user_data = array())
+    {
+    }
+
+    public function delete($id = "")
+    {
     }
 }
