@@ -5,7 +5,7 @@
  * @user Álvaro Leiva Toledano
  */
 
-class Comment
+class Comment extends DBAbstractModel
 {
     public $id;
     public $blog_id;

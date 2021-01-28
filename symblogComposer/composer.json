@@ -1,0 +1,16 @@
+{
+    "name": "alvaro/symblogcomposer",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Alvaro Leiva",
+            "email": "alvarooleto@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/"
+        }
+    },
+    "require": {}
+}

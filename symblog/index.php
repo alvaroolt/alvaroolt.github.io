@@ -8,7 +8,7 @@ $bl = Blog::getInstancia();
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html" ; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html" ; charset="utf-8" />
     <link href='http://fonts.googleapis.com/css?family=Irish+Grover' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=La+Belle+Aurore' rel='stylesheet' type='text/css'>
     <link href="css/screen.css" type="text/css" rel="stylesheet" />
