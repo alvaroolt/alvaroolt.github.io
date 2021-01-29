@@ -1,11 +1,10 @@
 <?php
-include "datos/datos.php";
-// require_once "vendor/autoload.php";
+// include "datos/datos.php";
+require_once "vendor/autoload.php";
 
-// use app\Models\Blog;
+use app\Models\Blog;
 // use app\Models\Comment;
 
-// $bl = Blog::getInstancia();
 
 ?>
 <!DOCTYPE html>
@@ -42,7 +41,7 @@ include "datos/datos.php";
 
             <?php
             $contador = 0;
-            foreach ($blogs as $blog) {
+            foreach (Blog::all() as $blog) {
                 $contador++;
                 echo "<article class=\"blog\">
                 <div class=\"date\">'

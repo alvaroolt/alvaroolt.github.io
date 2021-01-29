@@ -1,16 +1,19 @@
 {
-    "name": "alvaro/symblogcomposer",
+    "autoload": {
+        "psr-4": {
+            "App\\" : "app/"
+        }
+    },
+    "name": "usuario/symblog-composer",
+    "description": "Proyecto Symblog",
     "type": "project",
     "authors": [
         {
-            "name": "Alvaro Leiva",
-            "email": "alvarooleto@gmail.com"
+            "name": "Cristina Prieto Jalao",
+            "email": "cristinaprja@gmail.com"
         }
     ],
-    "autoload": {
-        "psr-4": {
-            "app\\": "app/"
-        }
-    },
-    "require": {}
+    "require": {
+        "illuminate/database": "^8.25"
+    }
 }

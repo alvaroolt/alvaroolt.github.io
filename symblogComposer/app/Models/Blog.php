@@ -1,20 +1,23 @@
 <?php
 
 namespace app\Models;
+use Illuminate\Database\Eloquent\Model;
 
-class Blog
+class Blog extends Model
 {
-    private static $instancia;
+    protected $table = "blog";
 
-    public $id;
-    public $title;
-    public $author;
-    public $blog;
-    public $image;
-    public $tags;
-    public $created;
-    public $updated;
-    public $comments = array();
+    // private static $instancia;
+
+    // public $id;
+    // public $title;
+    // public $author;
+    // public $blog;
+    // public $image;
+    // public $tags;
+    // public $created;
+    // public $updated;
+    // public $comments = array();
 
     // public function __construct($arrayDatos)
     // {
@@ -28,146 +31,146 @@ class Blog
     //     $this->updated = $arrayDatos['updated'];
     // }
 
-    public function getId()
-    {
-        return $this->id;
-    }
+    // public function getId()
+    // {
+    //     return $this->id;
+    // }
 
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
+    // public function setId($id)
+    // {
+    //     $this->id = $id;
+    // }
 
-    public function getTitle()
-    {
-        return $this->title;
-    }
+    // public function getTitle()
+    // {
+    //     return $this->title;
+    // }
 
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
+    // public function setTitle($title)
+    // {
+    //     $this->title = $title;
+    // }
 
-    public function getAuthor()
-    {
-        return $this->author;
-    }
+    // public function getAuthor()
+    // {
+    //     return $this->author;
+    // }
 
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-    }
+    // public function setAuthor($author)
+    // {
+    //     $this->author = $author;
+    // }
 
-    public function getBlog()
-    {
-        return $this->blog;
-    }
+    // public function getBlog()
+    // {
+    //     return $this->blog;
+    // }
 
-    public function setBlog($blog)
-    {
-        $this->blog = $blog;
-    }
+    // public function setBlog($blog)
+    // {
+    //     $this->blog = $blog;
+    // }
 
-    public function getImage()
-    {
-        return $this->image;
-    }
+    // public function getImage()
+    // {
+    //     return $this->image;
+    // }
 
-    public function setImage($image)
-    {
-        $this->image = $image;
-    }
+    // public function setImage($image)
+    // {
+    //     $this->image = $image;
+    // }
 
-    public function getTags()
-    {
-        return $this->tags;
-    }
+    // public function getTags()
+    // {
+    //     return $this->tags;
+    // }
 
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
-    }
+    // public function setTags($tags)
+    // {
+    //     $this->tags = $tags;
+    // }
 
-    public function getCreated()
-    {
-        return $this->created;
-    }
+    // public function getCreated()
+    // {
+    //     return $this->created;
+    // }
 
-    public function setCreated($created)
-    {
-        $this->created = $created;
-    }
+    // public function setCreated($created)
+    // {
+    //     $this->created = $created;
+    // }
 
-    public function getUpdated()
-    {
-        return $this->updated;
-    }
+    // public function getUpdated()
+    // {
+    //     return $this->updated;
+    // }
 
-    public function setUpdated($updated)
-    {
-        $this->updated = $updated;
-    }
+    // public function setUpdated($updated)
+    // {
+    //     $this->updated = $updated;
+    // }
 
-    public function addComment($comment)
-    {
-        array_push($this->comments, $comment);
-    }
+    // public function addComment($comment)
+    // {
+    //     array_push($this->comments, $comment);
+    // }
 
-    public function getNumComments()
-    {
-        return sizeof($this->comments);
-    }
+    // public function getNumComments()
+    // {
+    //     return sizeof($this->comments);
+    // }
 
-    public static function getInstancia()
-    {
-        if (!isset(self::$instancia)) {
-            $miClase = __CLASS__;
-            self::$instancia = new $miClase;
-        }
-        return self::$instancia;
-    }
+    // public static function getInstancia()
+    // {
+    //     if (!isset(self::$instancia)) {
+    //         $miClase = __CLASS__;
+    //         self::$instancia = new $miClase;
+    //     }
+    //     return self::$instancia;
+    // }
 
-    public function __clone()
-    {
-        trigger_error('La clonación no es permitida.', E_USER_ERROR);
-    }
+    // public function __clone()
+    // {
+    //     trigger_error('La clonación no es permitida.', E_USER_ERROR);
+    // }
 
-    public function getMessage()
-    {
-        return $this->mensaje;
-    }
+    // public function getMessage()
+    // {
+    //     return $this->mensaje;
+    // }
 
-    public function set($user_data = array())
-    {
-        // foreach ($user_data as $campo => $valor) {
-        //     $$campo = $valor;
-        // }
-        // $this->query = "INSERT INTO blogs (title, author, blog, image, tags, created, updated, comments) VALUES 
-        // (:title, :author, :blog, :image, :tags, :created, :updated, :comments)";
-        // $this->parametros['title'] = $user_data["title"];
-        // $this->parametros['author'] = $user_data["author"];
-        // $this->parametros['blog'] = $user_data["blog"];
-        // $this->parametros['image'] = $user_data["image"];
-        // $this->parametros['tags'] = $user_data["tags"];
-        // $this->parametros['created'] = $user_data["created"];
-        // $this->parametros['updated'] = $user_data["updated"];
-        // $this->parametros['comments'] = $user_data["comments"];
-        // $this->get_results_from_query();
-        // $this->execute_single_query();
-        // $this->mensaje = 'Superheroe agregado exitosamente';
-    }
+    // public function set($user_data = array())
+    // {
+    // foreach ($user_data as $campo => $valor) {
+    //     $$campo = $valor;
+    // }
+    // $this->query = "INSERT INTO blogs (title, author, blog, image, tags, created, updated, comments) VALUES 
+    // (:title, :author, :blog, :image, :tags, :created, :updated, :comments)";
+    // $this->parametros['title'] = $user_data["title"];
+    // $this->parametros['author'] = $user_data["author"];
+    // $this->parametros['blog'] = $user_data["blog"];
+    // $this->parametros['image'] = $user_data["image"];
+    // $this->parametros['tags'] = $user_data["tags"];
+    // $this->parametros['created'] = $user_data["created"];
+    // $this->parametros['updated'] = $user_data["updated"];
+    // $this->parametros['comments'] = $user_data["comments"];
+    // $this->get_results_from_query();
+    // $this->execute_single_query();
+    // $this->mensaje = 'Superheroe agregado exitosamente';
+    // }
 
-    public function get($id = "")
-    {
-    }
+    // public function get($id = "")
+    // {
+    // }
 
-    public function edit($user_data = array())
-    {
-    }
+    // public function edit($user_data = array())
+    // {
+    // }
 
-    public function delete($id = "")
-    {
-    }
+    // public function delete($id = "")
+    // {
+    // }
 
     // public function guardaBD()
     // {
