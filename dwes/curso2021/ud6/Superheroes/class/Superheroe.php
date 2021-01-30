@@ -100,9 +100,9 @@ class Superheroe extends DBAbstractModel
         foreach ($user_data as $campo => $valor) {
             $$campo = $valor;
         }
-        $this->query = "UPDATE superheroes SET nombre=:nombre, velocidad=:velocidad";
+        $this->query = "UPDATE superheroes SET nombre=:nombre, velocidad=:velocidad WHERE id=:id";
 
-        // this->parametros["id"] = $id;
+        $this->parametros["id"] = $id;
         $this->parametros["nombre"] = $nombre;
         $this->parametros["velocidad"] = $velocidad;
 
