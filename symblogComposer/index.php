@@ -3,9 +3,26 @@
 require_once "vendor/autoload.php";
 
 use app\Models\Blog;
-// use app\Models\Comment;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
+$capsule = new Capsule;
+$capsule->addConnection([
+    'driver'    => 'mysql',
+    'host'      => 'localhost',
+    'database'  => 'symblog',
+    'username'  => 'symblog',
+    'password'  => 'symblog',
+    'charset'   => 'utf8',
+    'collation' => 'utf8_unicode_ci',
+    'prefix'    => '',
+]);
+// Make this Capsule instance available globally via static methods... (optional)
+$capsule->setAsGlobal();
 
+// Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
+$capsule->bootEloquent();
+
+$blogs = Blog::all();
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,44 +43,42 @@ use app\Models\Blog;
             <div class="top">
                 <nav>
                     <ul class="navigation">
-                        <li><a href="index_sb.php">Home</a></li>
-                        <li><a href="about_sb.php">About</a></li>
-                        <li><a href="contact_sb.php">Contact</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.php">About</a></li>
+                        <li><a href="contact.php">Contact</a></li>
                     </ul>
                 </nav>
             </div>
             <hgroup>
-                <h2><a href="index_sb.php/">symblog</a></h2>
-                <h3><a href="index_sb.php/">creating a blog in Symfony2</a></h3>
+                <h2><a href="index.html">symblog</a></h2>
+                <h3><a href="index.html">creating a blog in Symfony2</a></h3>
             </hgroup>
         </header>
         <section class="main-col">
-
             <?php
             $contador = 0;
-            foreach (Blog::all() as $blog) {
+            foreach ($blogs as $blog) {
                 $contador++;
                 echo "<article class=\"blog\">
-                <div class=\"date\">'
-                    <time datetime=\" \">" . date_format($blog->getCreated(), 'Y-m-d H:i:s') . "</time>
-                </div>
-                <header>
-                    <h2><a href=\"show.php?id=$contador\">" . $blog->getTitle() . "</a></h2>
-                </header>'
-                <img src=\"img/" . $blog->getImage() . "\" />
-                <div class=\"snippet\">
-                    <p>" . $blog->getBlog() . "</p>'
-                    <p class=\"continue\"><a href=\"#\">Continue reading...</a></p>
-                </div>'
-                <footer class=\"meta\">'
-                    <p>Comments: <a href=\"#\">" . $blog->getNumComments() . "</a></p>
-                    <p>Posted by <span class=\"highlight\">" . $blog->getAuthor() . "</span> at" . date_format($blog->getCreated(), 'H:i:s') . "</p>
-                    <p>Tags: <span class=\"highlight\">" . $blog->getTags() . "</span></p>
-                </footer>
-            </article>";
+                        <div class=\"date\">'
+                            <time datetime=\" \">" . date_format($blog["created_at"], 'Y-m-d H:i:s') . "</time>
+                        </div>
+                        <header>
+                            <h2><a href=\"show.php?id=$contador\">" . $blog["title"] . "</a></h2>
+                        </header>'
+                        <img src=\"img/" . $blog["imagen"] . "\" />
+                        <div class=\"snippet\">
+                            <p>" . $blog["blog"] . "</p>'
+                            <p class=\"continue\"><a href=\"#\">Continue reading...</a></p>
+                        </div>'
+                        <footer class=\"meta\">'
+                            <p>Comments: <a href=\"#\">Numero</a></p>
+                            <p>Posted by <span class=\"highlight\">" . $blog["author"] . "</span> at " . date_format($blog["created_at"], 'H:i:s') . "</p>
+                            <p>Tags: <span class=\"highlight\">" . $blog["tags"] . "</span></p>
+                        </footer>
+                    </article>";
             }
             ?>
-
         </section>
         <aside class="sidebar">
             <section class="section">

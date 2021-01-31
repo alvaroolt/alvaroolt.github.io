@@ -1,79 +1,96 @@
 <?php
 
-namespace app\Models;
+namespace App\Models;
+// require_once('class/DBAbstractModel.php');
 
-/**
- * Clase Comment
- * @user Álvaro Leiva Toledano
- */
-
+// class Comment extends DBAbstractModel{
 class Comment
 {
-    public $id;
-    public $blog_id;
-    public $user;
-    public $comment;
-    public $approved;
-    public $created;
-    public $updated;
+    private static $instancia;
 
-    public function getBlog()
+    private $id;
+    private $blog;
+    private $user;
+    private $comment;
+    private $approved;
+    private $created;
+    private $updated;
+
+    public static function getInstancia()
     {
-        return $this->blog_id;
+        if (!isset(self::$instancia)) {
+            $miClase = __CLASS__;
+            self::$instancia = new $miClase;
+        }
+        return self::$instancia;
     }
 
-    public function setBlog($blog_id)
+    public function __clone()
     {
-        $this->blog_id = $blog_id;
+        trigger_error('La clonación no es permitida.', E_USER_ERROR);
     }
-
-    public function getUser()
+    public function guardarBD()
+    {    //HACERLO ASI
+        $this->query = "INSERT INTO comment (blog, user, comment) VALUES 
+            ( :blog, :user, :comment)";
+        $this->parametros["blog"] = $this->blog;
+        $this->parametros["user"] = $this->user;
+        $this->parametros["comment"] = $this->comment;
+        // $this->parametros["created"] = $this->created;
+        // $this->parametros["updated"] = $this->updated;
+        // $this->get_results_from_query();
+        $this->mensaje = 'comment agregado exitosamente';
+    }
+    public function set()
     {
-        return $this->user;
     }
-
+    public function get()
+    {
+    }
+    public function edit()
+    {
+    }
+    public function delete()
+    {
+    }
     public function setUser($user)
     {
         $this->user = $user;
     }
-
-    public function getComment()
+    public function getUser()
     {
-        return $this->comment;
+        return $this->user;
     }
-
     public function setComment($comment)
     {
         $this->comment = $comment;
     }
-
-    public function getApproved()
+    public function getComment()
     {
-        return $this->approved;
+        return $this->comment;
     }
-
+    public function setBlog($blog)
+    {
+        $this->blog = $blog;
+    }
+    public function getBlog()
+    {
+        return $this->blog;
+    }
     public function setApproved($approved)
     {
         $this->approved = $approved;
     }
-
-    public function getCreated()
-    {
-        return $this->created;
-    }
-
     public function setCreated($created)
     {
         $this->created = $created;
     }
-
-    public function getUpdated()
+    public function getCreated()
     {
-        return $this->updated;
+        return $this->created;
     }
-
-    public function setUpdated($updated)
+    public function setUpdated($uptaded)
     {
-        $this->updated = $updated;
+        $this->uptaded = $uptaded;
     }
 }
