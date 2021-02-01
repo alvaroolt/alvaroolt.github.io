@@ -2,11 +2,11 @@
 
 require_once "vendor/autoload.php";
 
-use app\Models\Blog;
-use app\Models\Comment;
+use App\Models\Blog;
+use App\Models\Comment;
 
-// include "app/Models/Blog.php";
-// include "app/Models/Comment.php";
+// include "App/Models/Blog.php";
+// include "App/Models/Comment.php";
 // include "config/config.php";
 
 $blog1 = new Blog();
@@ -133,7 +133,7 @@ $comment13->setBlog($blog3);
 
 $comment14 = new Comment();
 $comment14->setUser('Gabriel');
-$comment14->setComment('Oh, come on, Stan. Not everything ends the way you think it should. Besides, audiences love happy endings.');
+$comment14->setComment('Oh, come on, Stan. Not everything ends the way you think it should. Besides, audiences love hAppy endings.');
 $comment14->setBlog($blog3);
 
 $blog3->addComment($comment13);

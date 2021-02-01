@@ -13,8 +13,8 @@ class Comment
     private $user;
     private $comment;
     private $approved;
-    private $created;
-    private $updated;
+    private $created_at;
+    private $updated_at;
 
     public static function getInstancia()
     {
@@ -36,8 +36,8 @@ class Comment
         $this->parametros["blog"] = $this->blog;
         $this->parametros["user"] = $this->user;
         $this->parametros["comment"] = $this->comment;
-        // $this->parametros["created"] = $this->created;
-        // $this->parametros["updated"] = $this->updated;
+        // $this->parametros["created_at"] = $this->created_at;
+        // $this->parametros["updated_at"] = $this->updated_at;
         // $this->get_results_from_query();
         $this->mensaje = 'comment agregado exitosamente';
     }
@@ -81,15 +81,15 @@ class Comment
     {
         $this->approved = $approved;
     }
-    public function setCreated($created)
+    public function setcreated_at($created_at)
     {
-        $this->created = $created;
+        $this->created_at = $created_at;
     }
-    public function getCreated()
+    public function getcreated_at()
     {
-        return $this->created;
+        return $this->created_at;
     }
-    public function setUpdated($uptaded)
+    public function setupdated_at($uptaded)
     {
         $this->uptaded = $uptaded;
     }

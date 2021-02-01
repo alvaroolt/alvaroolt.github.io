@@ -1,5 +1,6 @@
 <?php
 require_once "vendor/autoload.php";
+
 use app\Models\Blog;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
@@ -22,7 +23,7 @@ $capsule->setAsGlobal();
 // Setup the Eloquent ORM (optional); unless you have used setEventDispatcher())
 $capsule->bootEloquent();
 
-if(!empty($_POST)) {
+if (!empty($_POST)) {
     $blog = new Blog();
     $blog->title = $_POST["title"];
     $blog->blog = $_POST["description"];
@@ -39,9 +40,9 @@ if(!empty($_POST)) {
     <meta http-equiv="Content-Type" content="text/html" ; charset="utf-8" />
     <link href='http://fonts.googleapis.com/css?family=Irish+Grover' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=La+Belle+Aurore' rel='stylesheet' type='text/css'>
-    <link href="css/screen.css" type="text/css" rel="stylesheet" />
-    <link href="css/sidebar.css" type="text/css" rel="stylesheet" />
-    <link href="css/blog.css" type="text/css" rel="stylesheet" />
+    <link href="../css/screen.css" type="text/css" rel="stylesheet" />
+    <link href="../css/sidebar.css" type="text/css" rel="stylesheet" />
+    <link href="../css/blog.css" type="text/css" rel="stylesheet" />
     <link rel="shortcut icon" href="img/favicon.ico" />
 </head>
 
@@ -51,9 +52,10 @@ if(!empty($_POST)) {
             <div class="top">
                 <nav>
                     <ul class="navigation">
-                        <li><a href="index_sb.php">Home</a></li>
-                        <li><a href="about_sb.php">About</a></li>
-                        <li><a href="contact_sb.php">Contact</a></li>
+                        <li><a href="index.php?route=/">Home</a></li>
+                        <li><a href="index.php?route=about">About</a></li>
+                        <li><a href="index.php?route=contact">Contact</a></li>
+                        <li><a href="index.php?route=addBlog">Add blog</a></li>
                     </ul>
                 </nav>
             </div>

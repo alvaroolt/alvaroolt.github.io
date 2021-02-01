@@ -2,25 +2,25 @@
 // include "datos/datos.php";
 require_once "vendor/autoload.php";
 
-use app\Models\Blog;
-use Illuminate\Database\Capsule\Manager as Capsule;
+use App\Models\Blog;
+// use Illuminate\Database\Capsule\Manager as Capsule;
 
-$capsule = new Capsule;
-$capsule->addConnection([
-    'driver'    => 'mysql',
-    'host'      => 'localhost',
-    'database'  => 'symblog',
-    'username'  => 'symblog',
-    'password'  => 'symblog',
-    'charset'   => 'utf8',
-    'collation' => 'utf8_unicode_ci',
-    'prefix'    => '',
-]);
-// Make this Capsule instance available globally via static methods... (optional)
-$capsule->setAsGlobal();
+// $capsule = new Capsule;
+// $capsule->addConnection([
+//     'driver'    => 'mysql',
+//     'host'      => 'localhost',
+//     'database'  => 'symblog',
+//     'username'  => 'symblog',
+//     'password'  => 'symblog',
+//     'charset'   => 'utf8',
+//     'collation' => 'utf8_unicode_ci',
+//     'prefix'    => '',
+// ]);
+// // Make this Capsule instance available globally via static methods... (optional)
+// $capsule->setAsGlobal();
 
-// Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
-$capsule->bootEloquent();
+// // Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
+// $capsule->bootEloquent();
 
 $blogs = Blog::all();
 ?>
@@ -31,9 +31,9 @@ $blogs = Blog::all();
     <meta http-equiv="Content-Type" content="text/html" ; charset="utf-8" />
     <link href='http://fonts.googleapis.com/css?family=Irish+Grover' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=La+Belle+Aurore' rel='stylesheet' type='text/css'>
-    <link href="css/screen.css" type="text/css" rel="stylesheet" />
-    <link href="css/sidebar.css" type="text/css" rel="stylesheet" />
-    <link href="css/blog.css" type="text/css" rel="stylesheet" />
+    <link href="../css/screen.css" type="text/css" rel="stylesheet" />
+    <link href="../css/sidebar.css" type="text/css" rel="stylesheet" />
+    <link href="../css/blog.css" type="text/css" rel="stylesheet" />
     <link rel="shortcut icon" href="img/favicon.ico" />
 </head>
 
@@ -43,15 +43,16 @@ $blogs = Blog::all();
             <div class="top">
                 <nav>
                     <ul class="navigation">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.php">About</a></li>
-                        <li><a href="contact.php">Contact</a></li>
+                        <li><a href="index.php?route=/">Home</a></li>
+                        <li><a href="index.php?route=about">About</a></li>
+                        <li><a href="index.php?route=contact">Contact</a></li>
+                        <li><a href="index.php?route=addBlog">Add blog</a></li>
                     </ul>
                 </nav>
             </div>
             <hgroup>
-                <h2><a href="index.html">symblog</a></h2>
-                <h3><a href="index.html">creating a blog in Symfony2</a></h3>
+                <h2><a href="index.php">symblog</a></h2>
+                <h3><a href="index.php">creating a blog in Symfony2</a></h3>
             </hgroup>
         </header>
         <section class="main-col">
@@ -66,7 +67,7 @@ $blogs = Blog::all();
                         <header>
                             <h2><a href=\"show.php?id=$contador\">" . $blog["title"] . "</a></h2>
                         </header>'
-                        <img src=\"img/" . $blog["imagen"] . "\" />
+                        <img src=\"../img/" . $blog["imagen"] . "\" />
                         <div class=\"snippet\">
                             <p>" . $blog["blog"] . "</p>'
                             <p class=\"continue\"><a href=\"#\">Continue reading...</a></p>
@@ -86,9 +87,10 @@ $blogs = Blog::all();
                     <h3>Tag Cloud</h3>
                 </header>
                 <p class="tags">
-                    <span class="weight-1">magic</span>
-                    <span class="weight-5">symblog</span>
-                    <span class="weight-4">movie</span>
+                    <li><a href="index.html?route=index">Home</a></li>
+                    <li><a href="index.html?route=about">About</a></li>
+                    <li><a href="index.html?route=contact">Contact</a></li>
+                    <li><a href="index.html?route=addBlog">Add blog</a></li>
                 </p>
             </section>
             <section class="section">
