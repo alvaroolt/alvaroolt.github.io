@@ -23,6 +23,7 @@ use App\Models\Blog;
 // $capsule->bootEloquent();
 
 $blogs = Blog::all();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,10 +44,10 @@ $blogs = Blog::all();
             <div class="top">
                 <nav>
                     <ul class="navigation">
-                        <li><a href="index.php?route=/">Home</a></li>
+                        <li><a href="symblogComposer/">Home</a></li>
                         <li><a href="index.php?route=about">About</a></li>
                         <li><a href="index.php?route=contact">Contact</a></li>
-                        <li><a href="index.php?route=addBlog">Add blog</a></li>
+                        <li><a href="symblogComposer/blogs/add">Add blog</a></li>
                     </ul>
                 </nav>
             </div>
