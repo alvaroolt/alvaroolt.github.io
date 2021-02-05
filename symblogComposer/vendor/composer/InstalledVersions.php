@@ -313,6 +313,15 @@ private static $installed = array (
         0 => '2.0',
       ),
     ),
+    'twig/twig' => 
+    array (
+      'pretty_version' => 'v3.2.1',
+      'version' => '3.2.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'f795ca686d38530045859b0350b5352f7d63447d',
+    ),
     'usuario/symblog-composer' => 
     array (
       'pretty_version' => '1.0.0+no-version-set',
