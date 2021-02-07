@@ -45,8 +45,8 @@ $blogs = Blog::all();
                 <nav>
                     <ul class="navigation">
                         <li><a href="/">Home</a></li>
-                        <li><a href="index.php?route=about">About</a></li>
-                        <li><a href="index.php?route=contact">Contact</a></li>
+                        <li><a href="">About</a></li>
+                        <li><a href="">Contact</a></li>
                         <li><a href="/blogs/add/">Add blog</a></li>
                     </ul>
                 </nav>
