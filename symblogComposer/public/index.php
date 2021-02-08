@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 
 require_once "../vendor/autoload.php";
 
-use App\Models\Blog;
+// use App\Models\Blog;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Aura\Router\RouterContainer;
 
@@ -77,7 +77,7 @@ if (!$route) {
     $actionName = $handlerData["action"];
 
     $controller = new $controllerName;
-    $controller->$actionName();
+    $response = $controller->$actionName($request);
 }
 
 // $blogs = Blog::all();
