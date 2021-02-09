@@ -58,7 +58,7 @@ $map->get("index", "/", [
     "controller" => "App\Controllers\IndexController",
     "action" => "indexAction"
 ]);
-$map->get("addBlog", "/blogs/add/", [
+$map->get("addBlog", "/blogs/add", [
     "controller" => "App\Controllers\BlogsController",
     "action" => "getAddBlogAction"
 ]);
