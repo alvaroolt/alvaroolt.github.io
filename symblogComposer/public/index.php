@@ -37,22 +37,6 @@ $request = Laminas\Diactoros\ServerRequestFactory::fromGlobals(
 $routerContainer = new RouterContainer();
 
 $map = $routerContainer->getMap();
-// los parametros de get son nombre de ruta, url, y respuesta
-// $map->get("index", "/", "../index.php");
-// $map->get("addBlog", "/blogs/add", "../addBlog.php"); TERMINA ESTO
-
-// $route = $_GET["route"] ?? "";
-
-// $matcher = $routerContainer->getMatcher();
-// $route = $matcher->match($request);
-// if (!$route) {
-//     echo "No route";
-// } else {
-//     require $route->handler;
-// }
-// var_dump($route);
-// echo "Visualización del handler </br>";
-// var_dump($route->handler);
 
 $map->get("index", "/", [
     "controller" => "App\Controllers\IndexController",
@@ -77,20 +61,8 @@ if (!$route) {
     $actionName = $handlerData["action"];
 
     $controller = new $controllerName;
+    $controller->$actionName($request);
+
     $response = $controller->$actionName($request);
+    // echo $response->getBody();
 }
-
-// $blogs = Blog::all();
-
-// $route = $_GET['route'] ?? "/";
-// if ($route == "/") {
-//     require "../index.php";
-// } else if ($route == "addBlog") {
-//     require "../addBlog.php";
-// } else if ($route == "contact") {
-//     require "../contact.php";
-// } else if ($route == "about") {
-//     require "../about.php";
-// } else {
-//     echo "No route";
-// }
