@@ -12,9 +12,16 @@ class IndexController extends BaseController
         $blogs = Blog::all();
         echo $this->renderHTML("index.twig", ["blogs" => $blogs]);
     }
+    public function contactAction()
+    {
+        echo $this->renderHTML("contact.twig");
+    }
+    public function aboutAction()
+    {
+        echo $this->renderHTML("about.twig");
+    }
     public function addBlogAction()
     {
-        include "../addBlog.php";
-        echo $this->renderHTML("../addBlog.twig");
+        echo $this->renderHTML("addBlog.twig");
     }
 }
