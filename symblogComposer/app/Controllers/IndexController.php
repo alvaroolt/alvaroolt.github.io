@@ -10,9 +10,11 @@ class IndexController extends BaseController
     public function indexAction()
     {
         $blogs = Blog::all();
-        return $this->renderHTML("index.twig", ["blogs" => $blogs]);
+        echo $this->renderHTML("index.twig", ["blogs" => $blogs]);
     }
-    public function addBlogAction() {
+    public function addBlogAction()
+    {
         include "../addBlog.php";
+        echo $this->renderHTML("../addBlog.twig");
     }
 }
