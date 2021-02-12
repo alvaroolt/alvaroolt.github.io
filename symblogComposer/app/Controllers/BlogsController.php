@@ -17,6 +17,6 @@ class BlogsController extends BaseController
             $blog->author = $postData["author"];
             $blog->save();
         }
-        echo $this->renderHTML("addBlog.twig");
+        return $this->renderHTML("addBlog.twig");
     }
 }

@@ -72,5 +72,5 @@ if (!$route) {
     $controller->$actionName($request);
 
     $response = $controller->$actionName($request);
-    // echo $response->getBody();
+    echo $response->getBody();
 }
