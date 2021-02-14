@@ -101,12 +101,21 @@ $map->post('saveUser', '/users/add', [
     'action' => 'getAddUserAction'
 ]);
 
+$map->get("formLogin", "/formLogin", [
+    "controller" => "App\Controllers\AuthController",
+    "action" => "formLogin"
+]);
+
+$map->post("login", "/formLogin", [
+    "controller" => "App\Controllers\AuthController",
+    "action" => "postLogin"
+]);
+
 $matcher = $routerContainer->getMatcher();
 $route = $matcher->match($request);
 if (!$route) {
     echo "No route";
 } else {
-    //require $route->handler;
     $handlerData = $route->handler;
     $controllerName = $handlerData['controller'];
     $actionName = $handlerData['action'];
