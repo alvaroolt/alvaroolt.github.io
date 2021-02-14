@@ -22,7 +22,7 @@ class BlogsController extends BaseController
             if ($imagen->getError() == UPLOAD_ERR_OK) {
                 $fileName = $imagen->getClientFilename();
                 $fileName = uniqid() . $fileName;
-                // $imagen->moveTO("../public/img/$fileName");
+                $imagen->moveTO("../public/img/$fileName");
                 $blog->imagen = $fileName;
             }
             $blog->save();

@@ -1,43 +1,26 @@
+
 {% extends 'layout.twig' %}
 {% block body %}
-	{% set contador = 0 %}
-	{% for blog in blogs %}
-		{% set contador = contador + 1 %}
-		<article class="blog">
-			<div class="date">
-				<time datetime="">
-					{{ blog.created_at|date("F jS \\a\\t g:ia") }}
-				</time>
-			</div>
-			<header>
-				<h2>
-					<a href="/blogs/show?id={{contador}}">
-						{{blog.title}}
-					</a>
-				</h2>
-			</header>
-			<img src="../public/img/{{blog.imagen}}"/>
-			<div class="snippet">
-				<p>
-					{{blog.blog}}
-				</p>
-				<p class="continue">
-					<a href="#">Contine reading</a>
-				</p>
-			</div>
-			<footer class="meta">
-				<p>Comments:
-					<a href="#">Numero</a>
-				</p>
-				<p>Posted by
-					<span class="highlight">
-						{{blog.author}}</span>
-					at
-					{{ blog.date|date("F jS \\a\\t g:ia") }}</p>
-				<p>Tags:
-					<span class="highlight">
-						{{blog.tags}}
-					</footer>
-					<article>
-					{% endfor %}
-				{% endblock %}
+{% for blog in blogs %}
+    <article class="blog">
+        <div class="date">
+            <time datetime="{{ blog.created_at|date('c') }}">{{ blog.created_at|date('l, F j, Y') }}</time>
+        </div>
+        <header>
+            <h2><a href="#">{{blog.title}}</a></h2>
+        </header>
+        <img src={{ "../public/img/" ~ blog.imagen ~ " "}}/>
+        <div class="snippet">
+            <p>{{blog.blog}}</p>
+            <p class="continue"><a href="#">Continue reading...</a></p>
+        </div>
+        <footer class="meta">
+            <p>Comments: <a href="#">Numero comentarios: </a></p>
+            <p>Posted by <span class="highlight">{{blog.author}}</span> at {{blog.created_at|date('h:iA')}}</p>
+            <p>Tags: <span class="highlight">{{blog.tags}}</span></p>
+        </footer>
+    </article>
+{% else %}
+    <p>There are no blog entries for symblog</p>
+{% endfor %}
+{% endblock %}
