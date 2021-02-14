@@ -1,17 +1,13 @@
 {% extends 'layout.twig' %}
 {% block body %}
-	<form action="/blogs/add" method="post">
+	<form action="/blogs/add" method="post" action="/blogs/add" enctype="multipart/form-data">
 		<div>
 			<ul>
-				<li>
-					<label>Title</label><input type="text" name="title"/></li>
-				<li>
-					<label>Description</label>
-					<textarea name="description"></textarea>
-				</li>
+				<li><label>Title</label><input type="text" name="title"/></li>
+				<li><label>Description</label><textarea name="description"></textarea></li>
 				<li><label>Tags</label><input type="text" name="tags"/></li>
 				<li><label>Author</label><input type="text" name="author"/></li>
-				{# <li><label>File</label><input type="file" name="imagen"/></li> #}
+				<li><label>File</label><input type="file" name="imagen"/></li>
 				<li><input type="submit" name="Enviar consulta"/></li>
 			</ul>
 		</div>
