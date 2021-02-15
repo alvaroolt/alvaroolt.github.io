@@ -18,7 +18,7 @@ class AuthController extends BaseController
 
         $user = User::where("mail", $postData["mail"])->first();
         if ($user) {
-            if (password_verify($postData["pass"], $user->password)) {
+            if (password_verify($postData["pass"], $user->pass)) {
                 $responseMessage = "Ok Credentials";
             } else {
                 $responseMessage = "Bad Credentials";
