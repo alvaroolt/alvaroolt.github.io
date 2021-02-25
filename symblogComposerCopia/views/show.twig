@@ -1,0 +1,32 @@
+{% extends 'layout.twig' %} 
+{% block body %}
+{% set contador =  app.request.uri %}
+    <h1>{{ contador }}</h1>
+        <article class="blog">
+            <div class="date">
+                <time datetime=""> {{ blog.created_at|date("F jS \a\t g:ia") }} </time>
+            </div>
+            <header>
+                <h2>{{blog.title}}</h2>
+            </header>
+            <img src="/symblogComposerCopia/img/{{blog.imagen}}" />
+            <div class="snippet">
+                <p> {{blog.blog}} </p> 
+                <p class="continue"><a href="#">Contine reading</a></p>
+            </div>
+            <footer class="meta">
+            <p>Comments: <a href="#">Numero</a></p>
+            <p>Posted by <span class="highlight"> {{blog.author}}</span> at {{ blog.date|date("F jS \a\t g:ia") }}</p>
+            <p>Tags: <span class="highlight"> {{blog.tags}}
+        </footer>
+        <article>
+
+    {% for comment in comments %}
+        <article class="comments">
+            <div class="comment">
+                <p><span class="highlight">{{comment.user}}</span> commented {{comment.created_at|date('l, F j, Y')}}</p>
+                <P>{{comment.comment}}</p>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock %}
