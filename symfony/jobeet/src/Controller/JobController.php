@@ -41,7 +41,7 @@ class JobController extends AbstractController
     /**
      * Finds and displays a job entity.
      *
-     * @Route("job/{id}", name="job.show", methods="GET", requirements={"id" = "\d+"})
+     * @Route("/{id}", name="job.show", methods="GET", requirements={"id" = "\d+"})
      *
      * @Entity("job", expr="repository.findActiveJob(id)")
      *
@@ -59,7 +59,7 @@ class JobController extends AbstractController
     /**
      * Creates a new job entity.
      *
-     * @Route("/job/create", name="job.create", methods={"GET", "POST"})
+     * @Route("/create", name="job.create", methods={"GET", "POST"})
      *
      * @param Request $request
      * @param EntityManagerInterface $em
@@ -99,7 +99,7 @@ class JobController extends AbstractController
     /**
      * Edit existing job entity
      *
-     * @Route("/job/{token}/edit", name="job.edit", methods={"GET", "POST"}, requirements={"token" = "\w+"})
+     * @Route("/{token}/edit", name="job.edit", methods={"GET", "POST"}, requirements={"token" = "\w+"})
      *
      * @param Request $request
      * @param Job $job
@@ -129,7 +129,7 @@ class JobController extends AbstractController
     /**
      * Finds and displays the preview page for a job entity.
      *
-     * @Route("job/{token}", name="job.preview", methods="GET", requirements={"token" = "\w+"})
+     * @Route("/{token}", name="job.preview", methods="GET", requirements={"token" = "\w+"})
      *
      * @param Job $job
      *
@@ -166,7 +166,7 @@ class JobController extends AbstractController
     /**
      * Delete a job entity.
      *
-     * @Route("job/{token}/delete", name="job.delete", methods="DELETE", requirements={"token" = "\w+"})
+     * @Route("/{token}/delete", name="job.delete", methods="DELETE", requirements={"token" = "\w+"})
      *
      * @param Request $request
      * @param Job $job
@@ -190,7 +190,7 @@ class JobController extends AbstractController
     /**
      * Publish a job entity.
      *
-     * @Route("job/{token}/publish", name="job.publish", methods="POST", requirements={"token" = "\w+"})
+     * @Route("/{token}/publish", name="job.publish", methods="POST", requirements={"token" = "\w+"})
      *
      * @param Request $request
      * @param Job $job
