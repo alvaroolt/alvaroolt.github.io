@@ -60,21 +60,6 @@ class Usuario extends DBAbstractModel
 
     public function edit($user_data = array())
     {
-        foreach ($user_data as $campo => $valor) {
-            $campo = $valor;
-        }
-        $this->query = "
-            UPDATE secre_usuario
-            SET nombre=:nombre,
-            usuario=:usuario
-            WHERE perfil = :perfil
-            ";
-        $this->parametros['nombre'] = $nombre;
-        $this->parametros['usuario'] = $usuario;
-        $this->parametros['perfil'] = $perfil;
-
-        $this->get_results_from_query();
-        $this->mensaje = 'Usuario modificado';
     }
 
     public function delete($id = "")
@@ -83,5 +68,14 @@ class Usuario extends DBAbstractModel
         $this->parametros["id"] = $id;
         $this->get_results_from_query();
         $this->mensaje = "Usuario eliminado de la base de datos.";
+    }
+
+    public function getPlan($user_data = "")
+    {
+        $this->query = "SELECT id FROM planes WHERE plan=:perfil";
+        $this->parametros['perfil'] = $user_data;
+        $this->get_results_from_query();
+        $this->close_connection();
+        return $this->rows;
     }
 }

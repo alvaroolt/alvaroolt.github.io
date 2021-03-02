@@ -11,21 +11,6 @@ class Serie extends DBAbstractModel
     private $id_plan;
     private $numero_reproducciones;
 
-    public function setTitulo($titulo)
-    {
-        $this->titulo = $titulo;
-    }
-
-    public function setCaratula($caratula)
-    {
-        $this->caratula = $caratula;
-    }
-
-    public function getSeries()
-    {
-        $this->query = "SELECT * FROM series";
-    }
-
     public static function getInstancia()
     {
         if (!isset(self::$instancia)) {
@@ -33,6 +18,25 @@ class Serie extends DBAbstractModel
             self::$instancia = new $miClase;
         }
         return self::$instancia;
+    }
+
+    public function setNumeroReproducciones()
+    {
+        // [...]
+    }
+
+    public function getNumeroReproducciones()
+    {
+        $this->query = "SELECT numero_reproducciones FROM series";
+        $this->get_results_from_query();
+        return $this->rows;
+    }
+
+    public function getSeries()
+    {
+        $this->query = "SELECT * FROM series ORDER BY numero_reproducciones DESC";
+        $this->get_results_from_query();
+        return $this->rows;
     }
 
     public function __clone()
@@ -48,11 +52,6 @@ class Serie extends DBAbstractModel
             $this->get_results_from_query();
         }
         return $this->rows;
-    }
-
-    public function getMessage()
-    {
-        return $this->mensaje;
     }
 
     public function getAll()
