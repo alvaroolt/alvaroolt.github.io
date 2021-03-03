@@ -4,6 +4,7 @@
     echo "Usuario <input type='text' name='user'><br/>";
     echo "Contraseña <input type='password' name='pass'><br/>";
     echo "<input type='submit' name='login' value='Enviar'>";
+    echo "<input type='submit' name='registro' value='Registro'>";
     echo "</form>";
     echo "<br/>";
 ?>

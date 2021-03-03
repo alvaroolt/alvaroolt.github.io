@@ -1,120 +1,88 @@
 <?php
-require_once('DBAbstractModel.php');
+    require_once('DBAbstractModel.php');
+    
+    class Serie extends DBAbstractModel {
+        private static $instancia;
 
-class Serie extends DBAbstractModel
-{
-    private static $instancia;
-
-    private $id;
-    private $titulo;
-    private $caratula;
-    private $id_plan;
-    private $numero_reproducciones;
-
-    public static function getInstancia()
-    {
-        if (!isset(self::$instancia)) {
-            $miClase = __CLASS__;
-            self::$instancia = new $miClase;
-        }
-        return self::$instancia;
-    }
-
-    public function setNumeroReproducciones()
-    {
-        // [...]
-    }
-
-    public function getNumeroReproducciones()
-    {
-        $this->query = "SELECT numero_reproducciones FROM series";
-        $this->get_results_from_query();
-        return $this->rows;
-    }
-
-    public function getSeries()
-    {
-        $this->query = "SELECT * FROM series ORDER BY numero_reproducciones DESC";
-        $this->get_results_from_query();
-        return $this->rows;
-    }
-
-    public function __clone()
-    {
-        trigger_error('La clonación no es permitida.', E_USER_ERROR);
-    }
-
-    public function buscarPorTitulo($buscar = "")
-    {
-        if ($buscar != '') {
-            $this->query = "SELECT * FROM series WHERE titulo LIKE :filtro";
-            $this->parametros["filtro"] = "%" . $buscar . "%";
-            $this->get_results_from_query();
-        }
-        return $this->rows;
-    }
-
-    public function getAll()
-    {
-        $this->query = "SELECT * FROM series";
-        $this->get_results_from_query();
-        return $this->rows;
-    }
-
-    public function set($user_data = array())
-    {
-        foreach ($user_data as $campo => $valor) {
-            $$campo = $valor;
-        }
-        $this->query = "INSERT INTO series (titulo, caratula, numero_reproducciones) VALUES 
-        (:titulo, :caratula, :numero_reproducciones)";
-        $this->parametros['titulo'] = $user_data["titulo"];
-        $this->parametros['caratula'] = $user_data["caratula"];
-        $this->parametros['numero_reproducciones'] = $user_data["numero_reproducciones"];
-        $this->get_results_from_query();
-        //$this->execute_single_query();
-        $this->mensaje = 'Serie agregada exitosamente';
-    }
-
-    public function get($id = "")
-    {
-        if ($id != "") {
-            $this->query = "SELECT * FROM series WHERE id =:id";
-        }
-        $this->parametros["id"] = $id; // carga de parámetros
-        $this->get_results_from_query(); // ejecución de la consulta que devuelve registros
-
-        if (count($this->rows) == 1) {
-            foreach ($this->rows[0] as $propiedad => $valor) {
-                $this->$propiedad = $valor;
+        private $id;
+        private $titulo;
+        private $caratula;
+        private $id_plan;
+        private $numero_reproducciones;
+ 
+        public static function getInstancia() {
+            if (!isset(self::$instancia)) {
+                $miClase = __CLASS__;
+                self::$instancia = new $miClase;
             }
-            $this->mensaje = 'Serie encontrada';
-        } else {
-            $this->mensaje = 'Serie no encontrada';
+            return self::$instancia;
         }
-        return $this->rows;
-    }
 
-    public function edit($user_data = array())
-    {
-        foreach ($user_data as $campo => $valor) {
-            $$campo = $valor;
+        public function __clone() {
+            trigger_error('La clonación no es permitida.', E_USER_ERROR);
         }
-        $this->query = "UPDATE series SET titulo=:titulo, caratula=:caratula WHERE id=:id";
-
-        $this->parametros["id"] = $id;
-        $this->parametros["titulo"] = $titulo;
-        $this->parametros["caratula"] = $caratula;
-
-        $this->get_results_from_query();
-        $this->mensaje = "Serie encontrada";
+        public function edit($user_data=array()) {
+            
+        }
+        public function get($user_data=""){
+            $this->query = "SELECT * FROM series ORDER BY numero_reproducciones DESC";
+            $this->get_results_from_query();
+            $this->close_connection();
+            return $this->rows;
+        }
+        public function getSerieById($user_data=""){
+            $this->query = "SELECT titulo FROM series WHERE id=:id";
+            $this->parametros['id']= $user_data;
+            $this->get_results_from_query();
+            $this->close_connection();
+            return $this->rows;
+        }
+        public function getPlan($user_data=""){
+            $this->query = "SELECT id_plan FROM series WHERE id=:id ";
+            $this->parametros['id']= $user_data;
+            $this->get_results_from_query();
+            $this->close_connection();
+            return $this->rows;
+        }
+        public function getNumRepro($user_data=""){
+            $this->query = "SELECT numero_reproducciones FROM series WHERE id=:id ";
+            $this->parametros['id']= $user_data;
+            $this->get_results_from_query();
+            $this->close_connection();
+            return $this->rows;
+        }
+        public function aumentarReproducciones($user_data=array()){
+            $this->query = "UPDATE series SET numero_reproducciones=:numero_reproducciones WHERE id=:id";
+            $this->parametros['id']= $user_data["id"];
+            $this->parametros['numero_reproducciones']= $user_data["numero_reproducciones"];
+            $this->get_results_from_query();
+            $this->close_connection();
+        }
+        public function set($user_data = array()) {
+            foreach ($user_data as $campo=>$valor) {
+                $$campo = $valor;
+            }
+            $this->query = "INSERT INTO series (id, titulo, caratula, valor) VALUES (:id, :titulo, :caratula, :id_plan)";
+            $this->parametros['id']=$id;
+            $this->parametros['titulo']=$titulo;
+            $this->parametros['caratula']=$caratula;
+            $this->parametros['id_plan']=$id_plan;
+            $this->get_results_from_query();
+            $this->close_connection();
+            $this->mensaje = 'Clave guardada';
+        }
+        public function delete($id="") {
+            $this->query = "DELETE FROM clavefirma WHERE id = :id";
+            $this->parametros['id']=$id;
+            $this->get_results_from_query();
+            $this->close_connection();
+            $this->mensaje = 'Clave firma eliminada';
+        }
+        function __construct() {
+            $this->db_name = 'book_example';
+        }
+        function __destruct() {
+            $this->conn = null;
+        }
     }
-
-    public function delete($id = "")
-    {
-        $this->query = "DELETE FROM series WHERE id=:id";
-        $this->parametros["id"] = $id;
-        $this->get_results_from_query();
-        $this->mensaje = "Serie eliminada de la base de datos.";
-    }
-}
+?>

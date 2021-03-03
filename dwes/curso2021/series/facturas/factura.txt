@@ -1,0 +1,5 @@
+FACTURA
+Usuario: {{nombre}}
+Cuota mensual de Series TV
+Importe: {{importe}} €
+Fecha: {{fecha}}

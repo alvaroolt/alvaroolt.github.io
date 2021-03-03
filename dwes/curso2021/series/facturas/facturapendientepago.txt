@@ -1,0 +1,5 @@
+FACTURA
+Usuario: pendientepago
+Cuota mensual de Series TV
+Importe: 7 €
+Fecha: Mes: 3, año 2020
