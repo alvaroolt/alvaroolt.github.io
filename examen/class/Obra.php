@@ -82,18 +82,15 @@ class Obra extends DBAbstractModel
         foreach ($user_data as $campo => $valor) {
             $$campo = $valor;
         }
-        $this->query = "INSERT INTO obras (id, titulo, descripcion, portada, fecha_inicio, fecha_final, numero_valoraciones, valoracion_media) VALUES (:id, :titulo, :descripcion, :portada, :fecha_inicio, :fecha_final, :numero_valoraciones, :valoracion_media)";
-        $this->parametros['id'] = $id;
-        $this->parametros['titulo'] = $titulo;
-        $this->parametros['descripcion'] = $descripcion;
-        $this->parametros['portada'] = $portada;
-        $this->parametros['fecha_inicio'] = $fecha_inicio;
-        $this->parametros['fecha_final'] = $fecha_final;
-        $this->parametros['numero_valoraciones'] = $numero_valoraciones;
-        $this->parametros['valoracion_media'] = $valoracion_media;
+        $this->query = "INSERT INTO obras (titulo, descripcion, portada, fecha_inicio, fecha_final) VALUES (:titulo, :descripcion, :portada, :fecha_inicio, :fecha_final)";
+        $this->parametros['titulo'] = $user_data["titulo"];
+        $this->parametros['descripcion'] = $user_data["descripcion"];
+        $this->parametros['portada'] = $user_data["portada"];
+        $this->parametros['fecha_inicio'] = $user_data["fecha_inicio"];
+        $this->parametros['fecha_final'] = $user_data["fecha_final"];
         $this->get_results_from_query();
         $this->close_connection();
-        $this->mensaje = 'Clave guardada';
+        $this->mensaje = 'Obra guardada';
     }
     public function delete($id = "")
     {
@@ -101,7 +98,7 @@ class Obra extends DBAbstractModel
         $this->parametros['id'] = $id;
         $this->get_results_from_query();
         $this->close_connection();
-        $this->mensaje = 'Clave firma eliminada';
+        $this->mensaje = 'Obra eliminada';
     }
     function __construct()
     {

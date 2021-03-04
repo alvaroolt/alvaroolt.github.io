@@ -58,9 +58,9 @@
                 $$campo = $valor;
             }
             $this->query = "INSERT INTO logs (fecha_hora, usuario, descripcion) VALUES (:fecha_hora, :usuario, :descripcion)";
-            $this->parametros['fecha_hora']=date('jS \of F Y h:i:s A');
-            $this->parametros['usuario']=$usuario;
-            $this->parametros['descripcion']=$descripcion;
+            $this->parametros['fecha_hora']=date('Y-m-d H:i:s');
+            $this->parametros['usuario']=$user_data["usuario"];
+            $this->parametros['descripcion']=$user_data["descripcion"];
             $this->get_results_from_query();
             $this->close_connection();
             $this->mensaje = 'Clave guardada';
@@ -70,7 +70,7 @@
             $this->parametros['id']=$id;
             $this->get_results_from_query();
             $this->close_connection();
-            $this->mensaje = 'Clave firma eliminada';
+            $this->mensaje = 'Log eliminado';
         }
         function __construct() {
             $this->db_name = 'book_example';
