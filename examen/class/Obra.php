@@ -28,7 +28,16 @@ class Obra extends DBAbstractModel
     }
     public function edit($user_data = array())
     {
+        $this->query = "UPDATE obras SET numero_valoraciones=:numero_valoraciones, 
+            valoracion_media=:valoracion_media WHERE id=:id";
+        $this->parametros['id'] = $user_data["id"];
+        $this->parametros['numero_valoraciones'] = $user_data["numero_valoraciones"];
+        $this->parametros['valoracion_media'] = $user_data["valoracion_media"];
+        $this->get_results_from_query();
+        $this->close_connection();
+        return $this->rows;
     }
+
     public function get($user_data = "")
     {
         $this->query = "SELECT * FROM obras";
@@ -36,46 +45,33 @@ class Obra extends DBAbstractModel
         $this->close_connection();
         return $this->rows;
     }
+
     public function getObraById($user_data = "")
     {
-        $this->query = "SELECT titulo FROM obras WHERE id=:id";
+        $this->query = "SELECT * FROM obras WHERE id=:id";
         $this->parametros['id'] = $user_data;
         $this->get_results_from_query();
         $this->close_connection();
         return $this->rows;
     }
-    // public function getObras()
-    // {
-    //     $this->query = "SELECT * FROM obras WHERE perfil=:perfil";
-    //     $this->parametros['perfil'] = "usuario";
-    //     $this->get_results_from_query();
-    //     $this->close_connection();
-    //     return $this->rows;
-    // }
 
-    // public function getPlan($user_data=""){
-    //     $this->query = "SELECT id_plan FROM series WHERE id=:id ";
-    //     $this->parametros['id']= $user_data;
-    //     $this->get_results_from_query();
-    //     $this->close_connection();
-    //     return $this->rows;
-    // }
+    public function getObrasPasadas($user_data)
+    {
+        $this->query = "SELECT * FROM obras WHERE fecha_final<:fecha_actual";
+        $this->parametros['fecha_actual'] = $user_data;
+        $this->get_results_from_query();
+        $this->close_connection();
+        return $this->rows;
+    }
 
-    // public function getNumRepro($user_data=""){
-    //     $this->query = "SELECT numero_reproducciones FROM series WHERE id=:id ";
-    //     $this->parametros['id']= $user_data;
-    //     $this->get_results_from_query();
-    //     $this->close_connection();
-    //     return $this->rows;
-    // }
-
-    // public function aumentarReproducciones($user_data=array()){
-    //     $this->query = "UPDATE series SET numero_reproducciones=:numero_reproducciones WHERE id=:id";
-    //     $this->parametros['id']= $user_data["id"];
-    //     $this->parametros['numero_reproducciones']= $user_data["numero_reproducciones"];
-    //     $this->get_results_from_query();
-    //     $this->close_connection();
-    // }
+    public function getEstrenos($user_data)
+    {
+        $this->query = "SELECT * FROM obras WHERE fecha_inicio>:fecha_actual";
+        $this->parametros['fecha_actual'] = $user_data;
+        $this->get_results_from_query();
+        $this->close_connection();
+        return $this->rows;
+    }
 
     public function set($user_data = array())
     {

@@ -16,8 +16,6 @@ if (!isset($_SESSION["userErr"])) {
 if (!isset($_SESSION["perfil"])) {
     $_SESSION["usuario"] = Usuario::getInstancia();
     $_SESSION["obra"] = Obra::getInstancia();
-    // print_r($_SESSION["obra"]);
-    // print_r($_SESSION["usuario"]);
     $_SESSION["log"] = Log::getInstancia();
     $_SESSION["perfil"] = "invitado";
 }
@@ -40,7 +38,7 @@ if (isset($_POST["login"])) {
             $arrayLog = array("usuario" => $arrayUsuario[0]["usuario"], "descripcion" => "Inicio de sesión incorrecto.");
             $_SESSION["log"]->set($arrayLog);
             if ($_SESSION["user"] == $_SESSION["userErr"]) {
-                if ($_SESSION["intentos"] == 3) {
+                if ($_SESSION["intentos"] >= 3) {
                     $_SESSION["usuario"]->desactivarUser($_SESSION["id_usuario"]);
                     echo "El usuario " . $_SESSION["user"] . " ha sido desactivado.";
                 } else {
