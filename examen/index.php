@@ -3,6 +3,8 @@ include "config/config.php";
 include "class/Usuario.php";
 include "class/Log.php";
 include "class/Obra.php";
+include "class/Entrada.php";
+include "class/Tarifa.php";
 
 session_start();
 
@@ -17,6 +19,8 @@ if (!isset($_SESSION["perfil"])) {
     $_SESSION["usuario"] = Usuario::getInstancia();
     $_SESSION["obra"] = Obra::getInstancia();
     $_SESSION["log"] = Log::getInstancia();
+    $_SESSION["entrada"] = Entrada::getInstancia();
+    $_SESSION["tarifa"] = Tarifa::getInstancia();
     $_SESSION["perfil"] = "invitado";
 }
 if (isset($_POST["login"])) {

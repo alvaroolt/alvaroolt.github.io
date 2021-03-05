@@ -73,6 +73,15 @@ class Obra extends DBAbstractModel
         return $this->rows;
     }
 
+    public function getTituloById($user_data)
+    {
+        $this->query = "SELECT titulo FROM obras WHERE id=:id";
+        $this->parametros['id'] = $user_data;
+        $this->get_results_from_query();
+        $this->close_connection();
+        return $this->rows;
+    }
+
     public function set($user_data = array())
     {
         foreach ($user_data as $campo => $valor) {
