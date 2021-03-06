@@ -29,29 +29,6 @@
             $this->close_connection();
             return $this->rows;
         }
-        // public function getLogById($user_data=""){
-        //     $this->query = "SELECT titulo FROM logs WHERE id=:id";
-        //     $this->parametros['id']= $user_data;
-        //     $this->get_results_from_query();
-        //     $this->close_connection();
-        //     return $this->rows;
-        // }
-
-        // PUEDE QUE ME HAGA FALTA PARA LOS VOTOS EN TEATRO
-        // public function getNumRepro($user_data=""){
-        //     $this->query = "SELECT numero_reproducciones FROM logs WHERE id=:id ";
-        //     $this->parametros['id']= $user_data;
-        //     $this->get_results_from_query();
-        //     $this->close_connection();
-        //     return $this->rows;
-        // }
-        // public function aumentarReproducciones($user_data=array()){
-        //     $this->query = "UPDATE logs SET numero_reproducciones=:numero_reproducciones WHERE id=:id";
-        //     $this->parametros['id']= $user_data["id"];
-        //     $this->parametros['numero_reproducciones']= $user_data["numero_reproducciones"];
-        //     $this->get_results_from_query();
-        //     $this->close_connection();
-        // }
         
         public function set($user_data = array()) {
             foreach ($user_data as $campo=>$valor) {

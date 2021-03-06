@@ -60,7 +60,8 @@ class Entrada extends DBAbstractModel
         foreach ($user_data as $campo => $valor) {
             $$campo = $valor;
         }
-        $this->query = "INSERT INTO entradas (fila, columna, precio, email) VALUES (:fila, :columna, :precio, :email)";
+        $this->query = "INSERT INTO entradas (idObra, fila, columna, precio, email) VALUES (:idObra, :fila, :columna, :precio, :email)";
+        $this->parametros['idObra'] = $user_data["idObra"];
         $this->parametros['fila'] = $user_data["fila"];
         $this->parametros['columna'] = $user_data["columna"];
         $this->parametros['precio'] = $user_data["precio"];

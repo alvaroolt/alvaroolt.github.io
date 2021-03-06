@@ -1,5 +1,5 @@
 <?php
-if ($_SESSION["perfil"] == "invitado" || $_SESSION["perfil"] == "admin") {
+if ($_SESSION["perfil"] == "invitado" || $_SESSION["perfil"] == "gerente") {
     header("Location: index.php");
 }
 if ($_SESSION["estado"] == 0) {
@@ -103,42 +103,28 @@ if ($_SESSION["estado"] == 0) {
         $entradasObraElegida = $_SESSION["entrada"]->getEntradaByIdObra($_GET["btnComprar"]);
         $tarifasObraElegida = $_SESSION["tarifa"]->getTarifaByIdObra($_GET["btnComprar"]);
 
-        echo "<h3>Butacas para " . $obraElegida[0]["titulo"] . "</h3>";
-        echo "<form action=\"index.php?page=amigo&btnComprar=$id\" method=\"post\">";
-        echo "<input type=\"hidden\" name=\"id\" value=\"" . $_GET["btnComprar"] . "\" />";
-        echo "<table border=\"1px solid black\"><tr><td></td>";
-        for ($i = 1; $i <= 20; $i++) {
-            echo "<td>Columna $i</td>";
-        }
-        echo "</tr>";
-        for ($fila = 1; $fila <= 20; $fila++) {
-            echo "<tr><td>Fila $fila</td>";
+        $arrayButacas = array();
+        for ($fila = 0; $fila <= 19; $fila++) {
+            array_push($arrayButacas, array());
             for ($columna = 1; $columna <= 20; $columna++) {
-                foreach ($entradasObraElegida as $key => $value) {
-                    if (($entradasObraElegida[$key]["columna"] == $columna) && ($entradasObraElegida[$key]["fila"] == $fila)) {
-                        echo "<td>X</td>";
-                        $columna = $columna + 1;
-                    } else {
-                        // echo "<td><input title=\"Texto flotante\" type=\"checkbox\" id=\"vehicle1\" name=\"vehicle1\" value=\"Bike\"></td>";
-                        // $columna = $columna + 1;
-                    }
-                }
                 $precio = "";
                 switch ($fila) {
+                        // los case no coinciden con las filas de las butacas porque el índice empieza en 0 y no en 1!!
+                    case 0:
                     case 1:
                     case 2:
                     case 3:
                     case 4:
-                    case 5:
                         $precio = $tarifasObraElegida[0]["zonaA"];
                         break;
+                    case 5:
                     case 6:
                     case 7:
                     case 8:
                     case 9:
-                    case 10:
                         $precio = $tarifasObraElegida[0]["zonaB"];
                         break;
+                    case 10:
                     case 11:
                     case 12:
                     case 13:
@@ -148,21 +134,102 @@ if ($_SESSION["estado"] == 0) {
                     case 17:
                     case 18:
                     case 19:
-                    case 20:
                         $precio = $tarifasObraElegida[0]["zonaC"];
                         break;
                 }
-                echo "<td><input title=\"Precio de butaca $fila,$columna: $precio" . "€\"" . " type=\"checkbox\" id=\"vehicle1\" name=\"butaca\" value=$precio></td>";
+                array_push($arrayButacas[$fila], $precio);
+            }
+        }
+        // print_r($arrayButacas);
+        // echo "</br></br>";
+        // print_r($arrayButacas[10]);
+
+        echo "<h3>Butacas para " . $obraElegida[0]["titulo"] . "</h3>";
+        echo "<form action=\"index.php?page=amigo&btnComprar=$id\" method=\"post\">";
+        echo "<input type=\"hidden\" name=\"id\" value=\"" . $_GET["btnComprar"] . "\" />";
+        echo "<table border=\"1px solid black\"><tr><td></td>";
+        for ($i = 1; $i <= 20; $i++) {
+            echo "<td>Columna $i</td>";
+        }
+        foreach ($arrayButacas as $key => $value) {
+            echo "<tr><td>Fila " . ($key + 1) . "</td>";
+            foreach ($value as $key2 => $value2) {
+                $butacaLibre = true;
+                foreach ($entradasObraElegida as $keyEntradas => $valueEntradas) {
+                    if (($entradasObraElegida[$keyEntradas]["columna"] == ($key2 + 1)) && ($entradasObraElegida[$keyEntradas]["fila"] == ($key + 1)) && $butacaLibre == true) {
+                        echo "<td>X</td>";
+                        // continue;
+                        $butacaLibre = false;
+                    }
+                }
+                if ($butacaLibre == true) {
+                    echo "<td><input title=\"Precio de butaca " . ($key + 1) . "," . ($key2 + 1) . ": $value2" . "€\"" . " type=\"checkbox\" id=\"butacaFila" . ($key + 1) . "Columna" . ($key2 + 1) . "\" name=\"butacaFila" . ($key + 1) . "Columna" . ($key2 + 1) . "\" value=$value2></td>";
+                }
             }
             echo "</tr>";
         }
         echo "</table>";
-        echo "<p><input type=\"submit\" name=\"btnComprarEntrada\" value=\"Confirmar compra de entradas\"></p>";
+        echo "<p><input type=\"submit\" name=\"btnComprarEntrada\" value=\"Comprar entradas\"></p>";
         echo "</form>";
-    }
 
-    if (isset($_POST["btnComprarEntrada"])) {
-        echo "Entradas compradas con éxito";
+        // sin esta sesión, no puedo recoger el array de butacas escogidas por el usuario en isset($_POST["btnComprarEntrada])
+        if (!isset($_SESSION["arrayButacasElegidas"])) {
+            $_SESSION["arrayButacasElegidas"] = array();
+        }
+
+        if (isset($_POST["btnComprarEntrada"])) {
+
+            $importe = 0;
+            $_SESSION["arrayButacasElegidas"] = array();
+
+            foreach ($arrayButacas as $key => $value) {
+                foreach ($value as $key2 => $value2) {
+                    if (isset($_POST["butacaFila" . ($key + 1) . "Columna" . ($key2 + 1)])) {
+                        $importe = $importe + $_POST["butacaFila" . ($key + 1) . "Columna" . ($key2 + 1)];
+                        array_push($_SESSION["arrayButacasElegidas"], array("fila" => ($key + 1), "columna" => ($key2 + 1)));
+                    }
+                }
+            }
+
+            // print_r($arrayButacasElegidas);
+            // echo "</br>";
+            // print_r($arrayButacas[19]);
+            echo "<form action=\"index.php?page=amigo&btnComprar=$id\" method=\"post\">";
+            echo "<table><tr><td>El importe total de las entradas es de " . $importe . "€ </td><td><input type=\"submit\" name=\"btnConfirmarCompra\" value=\"Confirmar compra\"></td></tr></table>";
+            echo "</form>";
+        }
+
+        if (isset($_POST["btnConfirmarCompra"])) {
+
+            // print_r($_SESSION["arrayButacasElegidas"]);
+            // echo "</br>";
+            $fila = 0;
+            $columna = 0;
+
+            foreach ($_SESSION["arrayButacasElegidas"] as $key => $value) {
+                foreach ($value as $key2 => $value2) {
+                    if ($key2 == "fila") {
+                        // echo "Fila: $value2</br>";
+                        $fila = $value2;
+                    }
+                    if ($key2 == "columna") {
+                        // echo "Columna: $value2</br>";
+                        $columna = $value2;
+                    }
+                }
+                $arrayNuevaEntrada = array(
+                    "idObra" => $_GET["btnComprar"],
+                    "fila" => $fila,
+                    "columna" => $columna,
+                    "precio" => 7,
+                    "email" => $_SESSION["correo"]
+                );
+
+                $_SESSION["entrada"]->set($arrayNuevaEntrada);
+            }
+            echo "<p>compra confirmada</p>";
+            // header("Location: index.php");
+        }
     }
 } else {
     echo "Tu cuenta ha sido bloqueada.";
