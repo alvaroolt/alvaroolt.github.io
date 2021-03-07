@@ -61,8 +61,6 @@ if (isset($_POST["login"])) {
         } else if ($_SESSION["perfil"] == "amigo") {
             header("Location: index.php?page=amigo");
         }
-    } else {
-        include "pages/home.php";
     }
 }
 

@@ -4,6 +4,33 @@ if ($_SESSION["perfil"] == "invitado" || $_SESSION["perfil"] == "gerente") {
 }
 if ($_SESSION["estado"] == 0) {
 
+    $entradasVendidas = $_SESSION["entrada"]->getEntradaByEmail($_SESSION["correo"]);
+    if (!empty($entradasVendidas)) {
+        echo "</br>Lista de entradas adquiridas:";
+        echo "</br><table border=\"1px solid black\">";
+        echo "<tr><th>Obra</th><th>Fila</th><th>Columna</th><th>Precio</th></tr>";
+        foreach ($entradasVendidas as $key => $value) {
+            echo "<tr>";
+            foreach ($value as $key2 => $value2) {
+
+                if ($key2 == "idObra") {
+                    echo "<td>" . $_SESSION["obra"]->getTituloById($value2)[0]["titulo"] . "</td>";
+                }
+                if ($key2 == "fila") {
+                    echo "<td>$value2</td>";
+                }
+                if ($key2 == "columna") {
+                    echo "<td>$value2</td>";
+                }
+                if ($key2 == "precio") {
+                    echo "<td>" . $value2 . "€</td>";
+                }
+            }
+            echo "</tr>";
+        }
+        echo "</table>";
+    }
+
     $listaObras = $_SESSION["obra"]->getObrasPasadas(date("Y-m-d H:i:s"));
     echo "<h3>Obras finalizadas</h3>";
     echo "<table border=\"1px solid black\">";
@@ -140,12 +167,9 @@ if ($_SESSION["estado"] == 0) {
                 array_push($arrayButacas[$fila], $precio);
             }
         }
-        // print_r($arrayButacas);
-        // echo "</br></br>";
-        // print_r($arrayButacas[10]);
 
         echo "<h3>Butacas para " . $obraElegida[0]["titulo"] . "</h3>";
-        echo "<form action=\"index.php?page=amigo&btnComprar=$id\" method=\"post\">";
+        echo "<form action=\"index.php?page=amigo&btnComprar=" . $obraElegida[0]["id"] . "\" method=\"post\">";
         echo "<input type=\"hidden\" name=\"id\" value=\"" . $_GET["btnComprar"] . "\" />";
         echo "<table border=\"1px solid black\"><tr><td></td>";
         for ($i = 1; $i <= 20; $i++) {
@@ -186,49 +210,46 @@ if ($_SESSION["estado"] == 0) {
                 foreach ($value as $key2 => $value2) {
                     if (isset($_POST["butacaFila" . ($key + 1) . "Columna" . ($key2 + 1)])) {
                         $importe = $importe + $_POST["butacaFila" . ($key + 1) . "Columna" . ($key2 + 1)];
-                        array_push($_SESSION["arrayButacasElegidas"], array("fila" => ($key + 1), "columna" => ($key2 + 1)));
+                        array_push($_SESSION["arrayButacasElegidas"], array("fila" => ($key + 1), "columna" => ($key2 + 1), "precio" => $_POST["butacaFila" . ($key + 1) . "Columna" . ($key2 + 1)]));
                     }
                 }
             }
 
-            // print_r($arrayButacasElegidas);
-            // echo "</br>";
-            // print_r($arrayButacas[19]);
-            echo "<form action=\"index.php?page=amigo&btnComprar=$id\" method=\"post\">";
+            echo "<form action=\"index.php?page=amigo&btnComprar=" . $obraElegida[0]["id"] . "\" method=\"post\">";
             echo "<table><tr><td>El importe total de las entradas es de " . $importe . "€ </td><td><input type=\"submit\" name=\"btnConfirmarCompra\" value=\"Confirmar compra\"></td></tr></table>";
             echo "</form>";
         }
 
         if (isset($_POST["btnConfirmarCompra"])) {
 
-            // print_r($_SESSION["arrayButacasElegidas"]);
-            // echo "</br>";
             $fila = 0;
             $columna = 0;
+            $precio = 0;
 
             foreach ($_SESSION["arrayButacasElegidas"] as $key => $value) {
                 foreach ($value as $key2 => $value2) {
                     if ($key2 == "fila") {
-                        // echo "Fila: $value2</br>";
                         $fila = $value2;
                     }
                     if ($key2 == "columna") {
-                        // echo "Columna: $value2</br>";
                         $columna = $value2;
+                    }
+                    if ($key2 == "precio") {
+                        $precio = $value2;
                     }
                 }
                 $arrayNuevaEntrada = array(
                     "idObra" => $_GET["btnComprar"],
                     "fila" => $fila,
                     "columna" => $columna,
-                    "precio" => 7,
+                    "precio" => $precio,
                     "email" => $_SESSION["correo"]
                 );
 
                 $_SESSION["entrada"]->set($arrayNuevaEntrada);
             }
             echo "<p>compra confirmada</p>";
-            // header("Location: index.php");
+            echo "<a href=\"index.php?page=amigo\">Regresar a página principal de amigo</a>";
         }
     }
 } else {

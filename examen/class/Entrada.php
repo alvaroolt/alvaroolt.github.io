@@ -55,6 +55,15 @@ class Entrada extends DBAbstractModel
         return $this->rows;
     }
 
+    public function getEntradaByEmail($user_data = "")
+    {
+        $this->query = "SELECT * FROM entradas WHERE email=:email";
+        $this->parametros['email'] = $user_data;
+        $this->get_results_from_query();
+        $this->close_connection();
+        return $this->rows;
+    }
+
     public function set($user_data = array())
     {
         foreach ($user_data as $campo => $valor) {
